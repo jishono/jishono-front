@@ -86,7 +86,7 @@
 					$meaing_count = $meaning->rowCount();
 
 					//意味が登録されていない場合
-					if ($meaing_count == 0){
+					if ($meaning_count == 0){
 						echo "意味: (登録なし)</p>";
 					}else{
 						$meaning_count = 1;
