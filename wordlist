@@ -1586,7 +1586,7 @@ var list = [
 "konkurs",
 "konsekvens",
 "konsentrere",
-"konsentrere seg"
+"konsentrere seg",
 "konsert",
 "konservativ",
 "konservere",
@@ -2218,7 +2218,7 @@ var list = [
 "periode",
 "permisjon",
 "person",
-"personalavdeling
+"personalavdeling",
 "personlig",
 "personnummer",
 "pikk",
@@ -2272,7 +2272,7 @@ var list = [
 "president",
 "presis",
 "presis",
-"pressekonferanse
+"pressekonferanse",
 "prest",
 "preteritum",
 "prikk",
@@ -3155,8 +3155,8 @@ var list = [
 "utenfor",
 "utenlandsk",
 "utenom",
-"utenriksdepartem
-"utenriksminister
+"utenriksdepartement",
+"utenriksminister",
 "utfordring",
 "utføre",
 "utgang",
