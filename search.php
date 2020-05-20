@@ -1,7 +1,7 @@
 <?php
 	// 半角英数チェック
 	function is_alnum($text) {
-		if (preg_match("/^[0-9A-ZÆÅØa-zæåø]+$/",$text)) {
+		if (preg_match("/^[0-9A-ZÆÅØa-zæåø\s\.]+$/",$text)) {
 			return TRUE;
 		} else {
 			return FALSE;
