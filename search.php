@@ -1,4 +1,4 @@
-<?
+<?php
 	// 半角英数チェック
 	function is_alnum($text) {
 		if (preg_match("/^[0-9A-ZÆÅØa-zæåø]+$/",$text)) {
@@ -33,6 +33,8 @@
 		LEFT JOIN uttale u
 		ON o.lemma_id = u.lemma_id
 		WHERE 1=1
+		WHERE o.lemma_id IN 
+			(SELECT lemma_id FROM definisjon)
 		AND o.oppslag LIKE (:allwild)
 		ORDER BY
 		CASE
