@@ -4,7 +4,7 @@
 </footer>
 
 <!-- 検索候補表示方法の参考元：http://www.enjoyxstudy.com/javascript/suggest/ -->
-<!-- Placed at the end of the document so the pages load faster -->
+<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://www.enjoyxstudy.com/js/bootstrap.min.js"></script>
 <script src="http://www.enjoyxstudy.com/js/scripts.js"></script>
