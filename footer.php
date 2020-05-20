@@ -9,7 +9,7 @@
     <script src="http://www.enjoyxstudy.com/js/bootstrap.min.js"></script>
     <script src="http://www.enjoyxstudy.com/js/scripts.js"></script>
 
-    <script src="http://www.enjoyxstudy.com/javascript/suggest/suggest.js"></script>
+    <script src="suggest.js"></script>
     <script src="./wordlist"></script>
     <script>
 
