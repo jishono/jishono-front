@@ -10,7 +10,7 @@
 <div class="stitch">
 <p>検索ワード (半角英数字)</p>
 		<form action = "search.php" method = "GET">
-			<input id="text" type="text" name="searchword" pattern="^[0-9A-ZÆÅØa-zæåø]+$" title="半角英数字で入力して下さい。" value="<? echo isset($searchword) ? $searchword : "" ?>" autocomplete="off" required>
+			<input id="text" type="text" name="searchword" pattern="^[0-9A-ZÆÅØa-zæåø]+$" title="半角英数字で入力して下さい。" value="<?php echo isset($searchword) ? $searchword : "" ?>" autocomplete="off" required>
 			<div id="suggest" style="display:none;" tabindex="-1"></div>
 			<input type = "submit" value = "検索">
 		</form>
