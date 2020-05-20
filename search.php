@@ -33,7 +33,7 @@
 		LEFT JOIN uttale u
 		ON o.lemma_id = u.lemma_id
 		WHERE 1=1
-		WHERE o.lemma_id IN 
+		AND o.lemma_id IN 
 			(SELECT lemma_id FROM definisjon)
 		AND o.oppslag LIKE (:allwild)
 		ORDER BY
