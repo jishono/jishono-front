@@ -1,6 +1,6 @@
 </div>
 <footer>
-  　<p>&copy; jisho@no. 2020.</p>
+  　<p>&copy; jisho.no 2020.</p>
 </footer>
 
 <!-- 検索候補表示方法の参考元：http://www.enjoyxstudy.com/javascript/suggest/ -->
