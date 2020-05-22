@@ -83,7 +83,7 @@
 						exit ;
 					}
 
-					$meaing_count = $meaning->rowCount();
+					$meaning_count = $meaning->rowCount();
 
 					//意味が登録されていない場合
 					if ($meaning_count == 0){
