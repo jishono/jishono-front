@@ -224,7 +224,7 @@
 								exit ;
 							}
 							while($con = $con_boy->fetch()){
-							echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>未知単数形: " . $con['ub_en'] . "</li><li>既知複数形: ". $con['be_en'] . "</li><li>未知複数形: ". $con['ub_fl'] . "</li><li>既知複数形: ". $con['be_fl'] . "</li></ul>";
+							echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>未知単数形: " . $con['ub_en'] . "</li><li>既知単数形: ". $con['be_en'] . "</li><li>未知複数形: ". $con['ub_fl'] . "</li><li>既知複数形: ". $con['be_fl'] . "</li></ul>";
 							$con_count++;
 							}
 						}
