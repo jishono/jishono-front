@@ -20,7 +20,6 @@
   // windowのonloadイベントでSuggestを生成
   // (listは、list.js内で定義している)
   var suggestList = <?php echo json_encode($suggestionList); ?>;
-  console.log(suggestList);
   var start = function() {
     new Suggest.Local("text", "suggest", suggestList, {
       dispMax: 0,
