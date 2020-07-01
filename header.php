@@ -20,13 +20,21 @@ $suggestionList = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
 </head>
 
 <body>
-	<div class='container p-0'>
-		<a href='/'>
-			<img class='mx-auto d-block logo my-4' src='css/jisho_logo_1.png' />
-		</a>
-		<div class="test">
-			<form action="search.php" method="GET">
-				<input placeholder='検索ワード (半角英数字)' class="input-group input-group-lg" id="text" type="text" name="searchword" pattern="^[0-9A-ZÆÅØa-zæåø\s\.\%]+$" title="半角英数字で入力して下さい。" value="<?php echo isset($searchword) ? $searchword : "" ?>" autocomplete="off" required>
-				<div id="suggest" class='list-group' style="display:none;" tabindex="-1"></div>
-
-			</form>
+	<div class='container-fluid'>
+		<div class='row' id='header'>
+			<div class='col'>
+				<a href='/'>
+					<img class='mx-auto d-block logo my-4' src='css/jisho_logo_1.png' />
+				</a>
+			</div>
+		</div>
+		<div class='row' id='searchbar'>
+			<div class='col-lg'></div>
+			<div class='col'>
+				<form action="search.php" method="GET">
+					<input class="input-lg form-control" placeholder='検索ワード (半角英数字)' id="text" type="text" name="searchword" pattern="^[0-9A-ZÆÅØa-zæåø\s\.\%]+$" title="半角英数字で入力して下さい。" value="<?php echo isset($searchword) ? $searchword : "" ?>" autocomplete="off" required>
+					<div id="suggest" class='list-group' style="display:none;" tabindex="-1"></div>
+				</form>
+			</div>
+			<div class='col-lg'></div>
+		</div>

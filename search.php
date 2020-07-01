@@ -105,13 +105,17 @@ if (is_alnum($searchword)) {
 			WriteResultToFile($searchword, $treff);
 
 			//Display Results Number Column
-			echo "<div class='my-4 text-center'>該当件数: " . $row_count . "件</div>";
-			echo "<div class='result-container container p-0'><div class='row'>";
+			echo "
+			<div class='row my-4' id='number'>
+				<div class='col text-center'>該当件数: " . $row_count . "件</div>
+			</div>";
+			echo "<div id='result-container'>";
 			$word_count = 1;
 
 			while ($row = $stmt->fetch()) {
 				// 検索結果表示
-				echo "<div class='result col-md-12'>";
+				echo "<div class='row my-2'>";
+				echo "<div class='col'>";
 				echo "<div class='card box-shadow'>";
 
 				$uttale = isset($row['pro']) ? "(発音: " . $row['pro'] . ")" : "(発音: 登録なし)";
@@ -127,6 +131,8 @@ if (is_alnum($searchword)) {
 
 
 				echo "</div>";
+				echo "</div>";
+
 				echo "</div>";
 
 				//以下、テスト用
@@ -585,7 +591,8 @@ if (is_alnum($searchword)) {
 } else {
 	echo "<div class='alert alert-danger text-center my-3'>半角英数字で検索して下さい。</div>";
 }
-echo "</div></div>";
+echo "</div>";
+echo "</div>";
 include('footer.php');
 
 function WriteResultToFile($word, $treff)
