@@ -63,8 +63,6 @@ function getWordType($boyning)
 if (is_alnum($searchword)) {
 	$searchword = escape($searchword);
 
-	//require('app/init.php');
-
 	//フォームで送られてきた条件を元にSELECT文を作成
 	//ID、綴り、活用、発音抽出。発音が登録されていなくも結果を表示するよう、LEFT　JOIN使用。
 	$sql = "
@@ -104,7 +102,6 @@ if (is_alnum($searchword)) {
 			$treff = $row_count > 0 ? "JA" : "NEI";
 			WriteResultToFile($searchword, $treff);
 
-			//Display Results Number Column
 			echo "
 			<div class='row my-4' id='number'>
 				<div class='col text-center'>該当件数: " . $row_count . "件</div>
@@ -120,7 +117,6 @@ if (is_alnum($searchword)) {
 
 				$uttale = isset($row['pro']) ? "(発音: " . $row['pro'] . ")" : "(発音: 登録なし)";
 				$ord = $row['spell'];
-				//$ordtype = $row['con'];
 				$ordtype = getWordType($row['con']);
 
 				echo "<div class='result-top-container card-header'>";
@@ -134,10 +130,6 @@ if (is_alnum($searchword)) {
 				echo "</div>";
 
 				echo "</div>";
-
-				//以下、テスト用
-				//echo $row['con'];
-				//echo $row['lemma_id'];
 
 				// IDから得られる意味を取得
 				$sql = "
@@ -278,7 +270,6 @@ if (is_alnum($searchword)) {
 							exit;
 						}
 						while ($con = $con_boy->fetch()) {
-							//echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>普通形: " . $con['pos'] . "</li><li>比較級: ". $con['kom'] . "</li><li>最上級: ". $con['sup'] . "</li></ul>";
 							$generateId = $row['con'] . $ord . $con_count;
 							echo "<button 
 							class='$btnClass'
@@ -334,7 +325,6 @@ if (is_alnum($searchword)) {
 							exit;
 						}
 						while ($con = $con_boy->fetch()) {
-							//echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>男性単数形: " . $con['m_en'] . "</li><li>女性単数形: ". $con['f_en'] . "</li><li>中性単数形: ". $con['n_en'] . "</li><li>既知単数形: ". $con['b_e'] . "</li><li>複数形: ". $con['fle'] . "</li></ul>";
 							$generateId = $row['con'] . $ord . $con_count;
 							echo "<button 
 							class='$btnClass'
@@ -390,7 +380,6 @@ if (is_alnum($searchword)) {
 						}
 
 						while ($con = $con_boy->fetch()) {
-							//echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>主格: " . $con['sub'] . "</li><li>目的格: ". $con['obj'] . "</li></ul>";
 							$generateId = $row['con'] . $ord . $con_count;
 							echo "<button 
 							class='$btnClass'
@@ -441,7 +430,6 @@ if (is_alnum($searchword)) {
 							exit;
 						}
 						while ($con = $con_boy->fetch()) {
-							//echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>未知単数形: " . $con['ub_en'] . "</li><li>既知単数形: ". $con['be_en'] . "</li><li>未知複数形: ". $con['ub_fl'] . "</li><li>既知複数形: ". $con['be_fl'] . "</li></ul>";
 							$generateId = $row['con'] . $ord . $con_count;
 							echo "<button 
 							class='$btnClass'
@@ -503,7 +491,6 @@ if (is_alnum($searchword)) {
 							exit;
 						}
 						while ($con = $con_boy->fetch()) {
-							//echo "活用パターン" . $con_count . ": " . $con['pos'] . "<ul><li>不定系: " . $con['inf'] . "</li><li>現在形: ". $con['pres'] . "</li><li>過去形: ". $con['pret'] . "</li><li>現在完了形: ". $con['pre_per'] . "</li><li>命令形: ". $con['imp'] . "</li><li>完了分詞男性・女性系: ". $con['per_m'] . "</li><li>完了分詞中性系: ". $con['per_n'] . "</li><li>完了分詞複数形: ". $con['per_f'] . "</li><li>現在分詞形: ". $con['par'] . "</li></ul>";
 							$generateId = $row['con'] . $ord . $con_count;
 							echo "<button 
 							class='$btnClass'
