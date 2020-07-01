@@ -520,7 +520,7 @@ if (is_alnum($searchword)) {
 							<table class='table table-sm table-bordered text-center'>
 								<thead>
 									<tr>
-										<th>不定系</th>
+										<th>不定形</th>
 										<th>現在形</th>
 										<th>過去形</th>
 									</tr>
@@ -537,7 +537,7 @@ if (is_alnum($searchword)) {
 								<thead>
 									<tr>
 										<th>現在完了形</th>
-										<th>現在分詞形:</th>
+										<th>現在分詞形</th>
 										<th>命令形</th>
 									</tr>
 								</thead>
