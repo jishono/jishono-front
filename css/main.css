@@ -1,13 +1,40 @@
+.stitch {
+   color: #fff;
+   padding: 20px;
+   font-size: 14px;
+   background: #FEA993;
+   border: 2px dashed #F7F9CC;
+   border-radius: 10px;
+   box-shadow: 0 0 0 7px #FEA993;
+}
+
 body {
-	font-family: 'Hiragino Maru Gothic Pro', 'ヒラギノ丸ゴ Pro W4', sans-serif !important;
+  padding: 5px 20px;
+  font-family: 'Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W4', sans-serif;
 }
 
-.logo {
-	max-height: 5em;
-	max-width: 70%;
-	margin-bottom: 1em;
-}
 
-.pointer {
-	cursor: pointer;
+#suggest {
+	position: absolute;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCFF;
+	width: 400px;
+	height: auto;
+	overflow: auto;
+	font-size: 12px;
+	color: #000000;
+}
+#suggest div {
+	padding: 1px;
+	display: block;
+	width: atuo;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#suggest div.select{
+	color: #FFFFFF;
+	background-color: #3366FF;
+}
+#suggest div.over{
+	background-color: #99CCFF;
 }

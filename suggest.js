@@ -14,485 +14,481 @@ For details, see the web site:
 */
 
 if (!Suggest) {
-	var Suggest = {};
+  var Suggest = {};
 }
 /*-- KeyCodes -----------------------------------------*/
 Suggest.Key = {
-	TAB: 9,
-	RETURN: 13,
-	ESC: 27,
-	UP: 38,
-	DOWN: 40
+  TAB:     9,
+  RETURN: 13,
+  ESC:    27,
+  UP:     38,
+  DOWN:   40
 };
 
 /*-- Utils --------------------------------------------*/
 Suggest.copyProperties = function(dest, src) {
-	for (var property in src) {
-		dest[property] = src[property];
-	}
-	return dest;
+  for (var property in src) {
+    dest[property] = src[property];
+  }
+  return dest;
 };
 
 /*-- Suggest.Local ------------------------------------*/
 Suggest.Local = function() {
-	this.initialize.apply(this, arguments);
+  this.initialize.apply(this, arguments);
 };
 Suggest.Local.prototype = {
-	initialize: function(input, suggestArea, candidateList) {
-		this.input = this._getElement(input);
-		this.suggestArea = this._getElement(suggestArea);
-		this.candidateList = candidateList;
-		this.oldText = this.getInputText();
+  initialize: function(input, suggestArea, candidateList) {
 
-		if (arguments[3]) this.setOptions(arguments[3]);
+    this.input = this._getElement(input);
+    this.suggestArea = this._getElement(suggestArea);
+    this.candidateList = candidateList;
+    this.oldText = this.getInputText();
 
-		// reg event
-		this._addEvent(this.input, 'focus', this._bind(this.checkLoop));
-		this._addEvent(this.input, 'blur', this._bind(this.inputBlur));
-		this._addEvent(this.suggestArea, 'blur', this._bind(this.inputBlur));
+    if (arguments[3]) this.setOptions(arguments[3]);
 
-		this._addEvent(this.input, 'keydown', this._bindEvent(this.keyEvent));
+    // reg event
+    this._addEvent(this.input, 'focus', this._bind(this.checkLoop));
+    this._addEvent(this.input, 'blur', this._bind(this.inputBlur));
+    this._addEvent(this.suggestArea, 'blur', this._bind(this.inputBlur));
 
-		// init
-		this.clearSuggestArea();
-	},
+    this._addEvent(this.input, 'keydown', this._bindEvent(this.keyEvent));
 
-	// options
-	interval: 500,
-	dispMax: 20,
-	listTagName: 'div',
-	prefix: false,
-	ignoreCase: true,
-	highlight: false,
-	dispAllKey: false,
-	classMouseOver: 'list-group-item active pointer',
-	classSelect: 'list-group-item active',
-	classBase: 'list-group-item list-group-item-action',
-	hookBeforeSearch: function() {},
+    // init
+    this.clearSuggestArea();
+  },
 
-	setOptions: function(options) {
-		Suggest.copyProperties(this, options);
-	},
+  // options
+  interval: 500,
+  dispMax: 20,
+  listTagName: 'div',
+  prefix: false,
+  ignoreCase: true,
+  highlight: false,
+  dispAllKey: false,
+  classMouseOver: 'over',
+  classSelect: 'select',
+  hookBeforeSearch: function(){},
 
-	inputBlur: function() {
-		setTimeout(
-			this._bind(function() {
-				if (document.activeElement == this.suggestArea || document.activeElement == this.input) {
-					// keep suggestion
-					return;
-				}
+  setOptions: function(options) {
+    Suggest.copyProperties(this, options);
+  },
 
-				this.changeUnactive();
-				this.oldText = this.getInputText();
+  inputBlur: function() {
 
-				if (this.timerId) clearTimeout(this.timerId);
-				this.timerId = null;
+    setTimeout(this._bind(function(){
 
-				setTimeout(this._bind(this.clearSuggestArea), 500);
-			}, 500)
-		);
-	},
+      if (document.activeElement == this.suggestArea
+          || document.activeElement == this.input) {
+        // keep suggestion
+        return;
+      }
 
-	checkLoop: function() {
-		var text = this.getInputText();
-		if (text != this.oldText) {
-			this.oldText = text;
-			this.search();
-		}
-		if (this.timerId) clearTimeout(this.timerId);
-		this.timerId = setTimeout(this._bind(this.checkLoop), this.interval);
-	},
+      this.changeUnactive();
+      this.oldText = this.getInputText();
 
-	search: function() {
-		// init
-		this.clearSuggestArea();
+      if (this.timerId) clearTimeout(this.timerId);
+      this.timerId = null;
 
-		var text = this.getInputText();
+      setTimeout(this._bind(this.clearSuggestArea), 500);
+    }, 500));
+  },
 
-		if (text == '' || text == null) return;
+  checkLoop: function() {
+    var text = this.getInputText();
+    if (text != this.oldText) {
+      this.oldText = text;
+      this.search();
+    }
+    if (this.timerId) clearTimeout(this.timerId);
+    this.timerId = setTimeout(this._bind(this.checkLoop), this.interval);
+  },
 
-		this.hookBeforeSearch(text);
-		var resultList = this._search(text);
-		if (resultList.length != 0) this.createSuggestArea(resultList);
-	},
+  search: function() {
 
-	_search: function(text) {
-		var resultList = [];
-		var temp;
-		this.suggestIndexList = [];
+    // init
+    this.clearSuggestArea();
 
-		for (var i = 0, length = this.candidateList.length; i < length; i++) {
-			if ((temp = this.isMatch(this.candidateList[i], text)) != null) {
-				resultList.push(temp);
-				this.suggestIndexList.push(i);
+    var text = this.getInputText();
 
-				if (this.dispMax != 0 && resultList.length >= this.dispMax) break;
-			}
-		}
-		return resultList;
-	},
+    if (text == '' || text == null) return;
 
-	isMatch: function(value, pattern) {
-		if (value == null) return null;
+    this.hookBeforeSearch(text);
+    var resultList = this._search(text);
+    if (resultList.length != 0) this.createSuggestArea(resultList);
+  },
 
-		var pos = this.ignoreCase ? value.toLowerCase().indexOf(pattern.toLowerCase()) : value.indexOf(pattern);
+  _search: function(text) {
 
-		if (pos == -1 || (this.prefix && pos != 0)) return null;
+    var resultList = [];
+    var temp; 
+    this.suggestIndexList = [];
 
-		if (this.highlight) {
-			return (
-				this._escapeHTML(value.substr(0, pos)) +
-				'<b>' +
-				this._escapeHTML(value.substr(pos, pattern.length)) +
-				'</b>' +
-				this._escapeHTML(value.substr(pos + pattern.length))
-			);
-		} else {
-			return this._escapeHTML(value);
-		}
-	},
+    for (var i = 0, length = this.candidateList.length; i < length; i++) {
+      if ((temp = this.isMatch(this.candidateList[i], text)) != null) {
+        resultList.push(temp);
+        this.suggestIndexList.push(i);
 
-	clearSuggestArea: function() {
-		this.suggestArea.innerHTML = '';
-		this.suggestArea.style.display = 'none';
-		this.suggestList = null;
-		this.suggestIndexList = null;
-		this.activePosition = null;
-	},
+        if (this.dispMax != 0 && resultList.length >= this.dispMax) break;
+      }
+    }
+    return resultList;
+  },
 
-	createSuggestArea: function(resultList) {
-		this.suggestList = [];
-		this.inputValueBackup = this.input.value;
+  isMatch: function(value, pattern) {
 
-		for (var i = 0, length = resultList.length; i < length; i++) {
-			var element = document.createElement(this.listTagName);
-			element.setAttribute('class', this.classBase);
-			element.innerHTML = resultList[i];
-			this.suggestArea.appendChild(element);
+    if (value == null) return null;
 
-			this._addEvent(element, 'click', this._bindEvent(this.listClick, i));
-			this._addEvent(element, 'mouseover', this._bindEvent(this.listMouseOver, i));
-			this._addEvent(element, 'mouseout', this._bindEvent(this.listMouseOut, i));
+    var pos = (this.ignoreCase) ?
+      value.toLowerCase().indexOf(pattern.toLowerCase())
+      : value.indexOf(pattern);
 
-			this.suggestList.push(element);
-		}
+    if ((pos == -1) || (this.prefix && pos != 0)) return null;
 
-		this.suggestArea.style.display = '';
-		this.suggestArea.scrollTop = 0;
-	},
+    if (this.highlight) {
+      return (this._escapeHTML(value.substr(0, pos)) + '<strong>' 
+             + this._escapeHTML(value.substr(pos, pattern.length)) 
+               + '</strong>' + this._escapeHTML(value.substr(pos + pattern.length)));
+    } else {
+      return this._escapeHTML(value);
+    }
+  },
 
-	getInputText: function() {
-		return this.input.value;
-	},
+  clearSuggestArea: function() {
+    this.suggestArea.innerHTML = '';
+    this.suggestArea.style.display = 'none';
+    this.suggestList = null;
+    this.suggestIndexList = null;
+    this.activePosition = null;
+  },
 
-	setInputText: function(text) {
-		this.input.value = text;
-	},
+  createSuggestArea: function(resultList) {
 
-	// key event
-	keyEvent: function(event) {
-		if (!this.timerId) {
-			this.timerId = setTimeout(this._bind(this.checkLoop), this.interval);
-		}
+    this.suggestList = [];
+    this.inputValueBackup = this.input.value;
 
-		if (
-			this.dispAllKey &&
-			event.ctrlKey &&
-			this.getInputText() == '' &&
-			!this.suggestList &&
-			event.keyCode == Suggest.Key.DOWN
-		) {
-			// dispAll
-			this._stopEvent(event);
-			this.keyEventDispAll();
-		} else if (event.keyCode == Suggest.Key.UP || event.keyCode == Suggest.Key.DOWN) {
-			// key move
-			if (this.suggestList && this.suggestList.length != 0) {
-				this._stopEvent(event);
-				this.keyEventMove(event.keyCode);
-			}
-		} else if (event.keyCode == Suggest.Key.RETURN) {
-			// fix
-			if (this.suggestList && this.suggestList.length != 0) {
-				this._stopEvent(event);
-				this.keyEventReturn();
-			}
-		} else if (event.keyCode == Suggest.Key.ESC) {
-			// cancel
-			if (this.suggestList && this.suggestList.length != 0) {
-				this._stopEvent(event);
-				this.keyEventEsc();
-			}
-		} else {
-			this.keyEventOther(event);
-		}
-	},
+    for (var i = 0, length = resultList.length; i < length; i++) {
+      var element = document.createElement(this.listTagName);
+      element.innerHTML = resultList[i];
+      this.suggestArea.appendChild(element);
 
-	keyEventDispAll: function() {
-		// init
-		this.clearSuggestArea();
+      this._addEvent(element, 'click', this._bindEvent(this.listClick, i));
+      this._addEvent(element, 'mouseover', this._bindEvent(this.listMouseOver, i));
+      this._addEvent(element, 'mouseout', this._bindEvent(this.listMouseOut, i));
 
-		this.oldText = this.getInputText();
+      this.suggestList.push(element);
+    }
 
-		this.suggestIndexList = [];
-		for (var i = 0, length = this.candidateList.length; i < length; i++) {
-			this.suggestIndexList.push(i);
-		}
+    this.suggestArea.style.display = '';
+    this.suggestArea.scrollTop = 0;
+  },
 
-		this.createSuggestArea(this.candidateList);
-	},
+  getInputText: function() {
+    return this.input.value;
+  },
 
-	keyEventMove: function(keyCode) {
-		this.changeUnactive();
+  setInputText: function(text) {
+    this.input.value = text;
+  },
 
-		if (keyCode == Suggest.Key.UP) {
-			// up
-			if (this.activePosition == null) {
-				this.activePosition = this.suggestList.length - 1;
-			} else {
-				this.activePosition--;
-				if (this.activePosition < 0) {
-					this.activePosition = null;
-					this.input.value = this.inputValueBackup;
-					this.suggestArea.scrollTop = 0;
-					return;
-				}
-			}
-		} else {
-			// down
-			if (this.activePosition == null) {
-				this.activePosition = 0;
-			} else {
-				this.activePosition++;
-			}
+  // key event
+  keyEvent: function(event) {
 
-			if (this.activePosition >= this.suggestList.length) {
-				this.activePosition = null;
-				this.input.value = this.inputValueBackup;
-				this.suggestArea.scrollTop = 0;
-				return;
-			}
-		}
+    if (!this.timerId) {
+      this.timerId = setTimeout(this._bind(this.checkLoop), this.interval);
+    }
 
-		this.changeActive(this.activePosition);
-	},
+    if (this.dispAllKey && event.ctrlKey 
+        && this.getInputText() == ''
+        && !this.suggestList
+        && event.keyCode == Suggest.Key.DOWN) {
+      // dispAll
+      this._stopEvent(event);
+      this.keyEventDispAll();
+    } else if (event.keyCode == Suggest.Key.UP ||
+               event.keyCode == Suggest.Key.DOWN) {
+      // key move
+      if (this.suggestList && this.suggestList.length != 0) {
+        this._stopEvent(event);
+        this.keyEventMove(event.keyCode);
+      }
+    } else if (event.keyCode == Suggest.Key.RETURN) {
+      // fix
+      if (this.suggestList && this.suggestList.length != 0) {
+        this._stopEvent(event);
+        this.keyEventReturn();
+      }
+    } else if (event.keyCode == Suggest.Key.ESC) {
+      // cancel
+      if (this.suggestList && this.suggestList.length != 0) {
+        this._stopEvent(event);
+        this.keyEventEsc();
+      }
+    } else {
+      this.keyEventOther(event);
+    }
+  },
 
-	keyEventReturn: function() {
-		this.clearSuggestArea();
-		this.moveEnd();
-		this.performSearch();
-	},
+  keyEventDispAll: function() {
 
-	keyEventEsc: function() {
-		this.clearSuggestArea();
-		this.input.value = this.inputValueBackup;
-		this.oldText = this.getInputText();
+    // init
+    this.clearSuggestArea();
 
-		if (window.opera) setTimeout(this._bind(this.moveEnd), 5);
-	},
+    this.oldText = this.getInputText();
 
-	keyEventOther: function(event) {},
+    this.suggestIndexList = [];
+    for (var i = 0, length = this.candidateList.length; i < length; i++) {
+      this.suggestIndexList.push(i);
+    }
 
-	changeActive: function(index) {
-		this.setStyleActive(this.suggestList[index]);
+    this.createSuggestArea(this.candidateList);
+  },
 
-		this.setInputText(this.candidateList[this.suggestIndexList[index]]);
+  keyEventMove: function(keyCode) {
 
-		this.oldText = this.getInputText();
-		this.input.focus();
-	},
+    this.changeUnactive();
 
-	changeUnactive: function() {
-		if (this.suggestList != null && this.suggestList.length > 0 && this.activePosition != null) {
-			this.setStyleUnactive(this.suggestList[this.activePosition]);
-		}
-	},
+    if (keyCode == Suggest.Key.UP) {
+      // up
+      if (this.activePosition == null) {
+        this.activePosition = this.suggestList.length -1;
+      }else{
+        this.activePosition--;
+        if (this.activePosition < 0) {
+          this.activePosition = null;
+          this.input.value = this.inputValueBackup;
+          this.suggestArea.scrollTop = 0;
+          return;
+        }
+      }
+    }else{
+      // down
+      if (this.activePosition == null) {
+        this.activePosition = 0;
+      }else{
+        this.activePosition++;
+      }
 
-	listClick: function(event, index) {
-		this.changeUnactive();
-		this.activePosition = index;
-		this.changeActive(index);
+      if (this.activePosition >= this.suggestList.length) {
+        this.activePosition = null;
+        this.input.value = this.inputValueBackup;
+        this.suggestArea.scrollTop = 0;
+        return;
+      }
+    }
 
-		this.clearSuggestArea();
-		this.moveEnd();
-		this.performSearch();
-	},
+    this.changeActive(this.activePosition);
+  },
 
-	performSearch: function() {
-		window.location.href = '/search.php?searchword=' + this.getInputText();
-	},
+  keyEventReturn: function() {
 
-	listMouseOver: function(event, index) {
-		this.setStyleMouseOver(this._getEventElement(event));
-	},
+    this.clearSuggestArea();
+    this.moveEnd();
+  },
 
-	listMouseOut: function(event, index) {
-		if (!this.suggestList) return;
+  keyEventEsc: function() {
 
-		var element = this._getEventElement(event);
+    this.clearSuggestArea();
+    this.input.value = this.inputValueBackup;
+    this.oldText = this.getInputText();
 
-		if (index == this.activePosition) {
-			this.setStyleActive(element);
-		} else {
-			this.setStyleUnactive(element);
-		}
-	},
+    if (window.opera) setTimeout(this._bind(this.moveEnd), 5);
+  },
 
-	setStyleActive: function(element) {
-		//console.log(element.nodeName);
-		element.className = this.classSelect;
+  keyEventOther: function(event) {},
 
-		// auto scroll
-		var offset = element.offsetTop;
-		var offsetWithHeight = offset + element.clientHeight;
+  changeActive: function(index) {
 
-		if (this.suggestArea.scrollTop > offset) {
-			this.suggestArea.scrollTop = offset;
-		} else if (this.suggestArea.scrollTop + this.suggestArea.clientHeight < offsetWithHeight) {
-			this.suggestArea.scrollTop = offsetWithHeight - this.suggestArea.clientHeight;
-		}
-	},
+    this.setStyleActive(this.suggestList[index]);
 
-	setStyleUnactive: function(element) {
-		let elementType = element.constructor.name;
-		if (elementType === 'HTMLDivElement') {
-			element.className = this.classBase;
-		}
-	},
+    this.setInputText(this.candidateList[this.suggestIndexList[index]]);
 
-	setStyleMouseOver: function(element) {
-		let elementType = element.constructor.name;
-		if (elementType === 'HTMLDivElement') {
-			element.className = this.classMouseOver;
-		}
-	},
+    this.oldText = this.getInputText();
+    this.input.focus();
+  },
 
-	moveEnd: function() {
-		if (this.input.createTextRange) {
-			this.input.focus(); // Opera
-			var range = this.input.createTextRange();
-			range.move('character', this.input.value.length);
-			range.select();
-		} else if (this.input.setSelectionRange) {
-			this.input.setSelectionRange(this.input.value.length, this.input.value.length);
-		}
-	},
+  changeUnactive: function() {
 
-	// Utils
-	_getElement: function(element) {
-		return typeof element == 'string' ? document.getElementById(element) : element;
-	},
-	_addEvent: window.addEventListener
-		? function(element, type, func) {
-				element.addEventListener(type, func, false);
-			}
-		: function(element, type, func) {
-				element.attachEvent('on' + type, func);
-			},
-	_stopEvent: function(event) {
-		if (event.preventDefault) {
-			event.preventDefault();
-			event.stopPropagation();
-		} else {
-			event.returnValue = false;
-			event.cancelBubble = true;
-		}
-	},
-	_getEventElement: function(event) {
-		return event.target || event.srcElement;
-	},
-	_bind: function(func) {
-		var self = this;
-		var args = Array.prototype.slice.call(arguments, 1);
-		return function() {
-			func.apply(self, args);
-		};
-	},
-	_bindEvent: function(func) {
-		var self = this;
-		var args = Array.prototype.slice.call(arguments, 1);
-		return function(event) {
-			event = event || window.event;
-			func.apply(self, [ event ].concat(args));
-		};
-	},
-	_escapeHTML: function(value) {
-		return value
-			.replace(/\&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/\"/g, '&quot;')
-			.replace(/\'/g, '&#39;');
-	}
+    if (this.suggestList != null 
+        && this.suggestList.length > 0
+        && this.activePosition != null) {
+      this.setStyleUnactive(this.suggestList[this.activePosition]);
+    }
+  },
+
+  listClick: function(event, index) {
+
+    this.changeUnactive();
+    this.activePosition = index;
+    this.changeActive(index);
+
+    this.clearSuggestArea();
+    this.moveEnd();
+  },
+
+  listMouseOver: function(event, index) {
+    this.setStyleMouseOver(this._getEventElement(event));
+  },
+
+  listMouseOut: function(event, index) {
+
+    if (!this.suggestList) return;
+
+    var element = this._getEventElement(event);
+
+    if (index == this.activePosition) {
+      this.setStyleActive(element);
+    }else{
+      this.setStyleUnactive(element);
+    }
+  },
+
+  setStyleActive: function(element) {
+    element.className = this.classSelect;
+
+    // auto scroll
+    var offset = element.offsetTop;
+    var offsetWithHeight = offset + element.clientHeight;
+
+    if (this.suggestArea.scrollTop > offset) {
+      this.suggestArea.scrollTop = offset
+    } else if (this.suggestArea.scrollTop + this.suggestArea.clientHeight < offsetWithHeight) {
+      this.suggestArea.scrollTop = offsetWithHeight - this.suggestArea.clientHeight;
+    }
+  },
+
+  setStyleUnactive: function(element) {
+    element.className = '';
+  },
+
+  setStyleMouseOver: function(element) {
+    element.className = this.classMouseOver;
+  },
+
+  moveEnd: function() {
+
+    if (this.input.createTextRange) {
+      this.input.focus(); // Opera
+      var range = this.input.createTextRange();
+      range.move('character', this.input.value.length);
+      range.select();
+    } else if (this.input.setSelectionRange) {
+      this.input.setSelectionRange(this.input.value.length, this.input.value.length);
+    }
+  },
+
+  // Utils
+  _getElement: function(element) {
+    return (typeof element == 'string') ? document.getElementById(element) : element;
+  },
+  _addEvent: (window.addEventListener ?
+    function(element, type, func) {
+      element.addEventListener(type, func, false);
+    } :
+    function(element, type, func) {
+      element.attachEvent('on' + type, func);
+    }),
+  _stopEvent: function(event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      event.returnValue = false;
+      event.cancelBubble = true;
+    }
+  },
+  _getEventElement: function(event) {
+    return event.target || event.srcElement;
+  },
+  _bind: function(func) {
+    var self = this;
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function(){ func.apply(self, args); };
+  },
+  _bindEvent: function(func) {
+    var self = this;
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function(event){ event = event || window.event; func.apply(self, [event].concat(args)); };
+  },
+  _escapeHTML: function(value) {
+    return value.replace(/\&/g, '&amp;').replace( /</g, '&lt;').replace(/>/g, '&gt;')
+             .replace(/\"/g, '&quot;').replace(/\'/g, '&#39;');
+  }
 };
 
 /*-- Suggest.LocalMulti ---------------------------------*/
 Suggest.LocalMulti = function() {
-	this.initialize.apply(this, arguments);
+  this.initialize.apply(this, arguments);
 };
 Suggest.copyProperties(Suggest.LocalMulti.prototype, Suggest.Local.prototype);
 
 Suggest.LocalMulti.prototype.delim = ' '; // delimiter
 
 Suggest.LocalMulti.prototype.keyEventReturn = function() {
-	this.clearSuggestArea();
-	this.input.value += this.delim;
-	this.moveEnd();
+
+  this.clearSuggestArea();
+  this.input.value += this.delim;
+  this.moveEnd();
 };
 
 Suggest.LocalMulti.prototype.keyEventOther = function(event) {
-	if (event.keyCode == Suggest.Key.TAB) {
-		// fix
-		if (this.suggestList && this.suggestList.length != 0) {
-			this._stopEvent(event);
 
-			if (!this.activePosition) {
-				this.activePosition = 0;
-				this.changeActive(this.activePosition);
-			}
+  if (event.keyCode == Suggest.Key.TAB) {
+    // fix
+    if (this.suggestList && this.suggestList.length != 0) {
+      this._stopEvent(event);
 
-			this.clearSuggestArea();
-			this.input.value += this.delim;
-			if (window.opera) {
-				setTimeout(this._bind(this.moveEnd), 5);
-			} else {
-				this.moveEnd();
-			}
-		}
-	}
+      if (!this.activePosition) {
+        this.activePosition = 0;
+        this.changeActive(this.activePosition);
+      }
+
+      this.clearSuggestArea();
+      this.input.value += this.delim;
+      if (window.opera) {
+        setTimeout(this._bind(this.moveEnd), 5);
+      } else {
+        this.moveEnd();
+      }
+    }
+  }
 };
 
 Suggest.LocalMulti.prototype.listClick = function(event, index) {
-	this.changeUnactive();
-	this.activePosition = index;
-	this.changeActive(index);
 
-	this.input.value += this.delim;
+  this.changeUnactive();
+  this.activePosition = index;
+  this.changeActive(index);
 
-	this.clearSuggestArea();
-	this.moveEnd();
+  this.input.value += this.delim;
+
+  this.clearSuggestArea();
+  this.moveEnd();
 };
 
 Suggest.LocalMulti.prototype.getInputText = function() {
-	var pos = this.getLastTokenPos();
 
-	if (pos == -1) {
-		return this.input.value;
-	} else {
-		return this.input.value.substr(pos + 1);
-	}
+  var pos = this.getLastTokenPos();
+
+  if (pos == -1) {
+    return this.input.value;
+  } else {
+    return this.input.value.substr(pos + 1);
+  }
 };
 
 Suggest.LocalMulti.prototype.setInputText = function(text) {
-	var pos = this.getLastTokenPos();
 
-	if (pos == -1) {
-		this.input.value = text;
-	} else {
-		this.input.value = this.input.value.substr(0, pos + 1) + text;
-	}
+  var pos = this.getLastTokenPos();
+
+  if (pos == -1) {
+    this.input.value = text;
+  } else {
+    this.input.value = this.input.value.substr(0 , pos + 1) + text;
+  }
 };
 
 Suggest.LocalMulti.prototype.getLastTokenPos = function() {
-	return this.input.value.lastIndexOf(this.delim);
+  return this.input.value.lastIndexOf(this.delim);
 };
+
