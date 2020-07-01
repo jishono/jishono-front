@@ -112,6 +112,7 @@ if (is_alnum($searchword)) {
 			while ($row = $stmt->fetch()) {
 				// 検索結果表示
 				echo "<div class='row my-2'>";
+				echo "<div class='col-lg-2'></div>";
 				echo "<div class='col'>";
 				echo "<div class='card box-shadow'>";
 
@@ -128,7 +129,6 @@ if (is_alnum($searchword)) {
 
 				echo "</div>";
 				echo "</div>";
-
 				echo "</div>";
 
 				// IDから得られる意味を取得
@@ -563,9 +563,11 @@ if (is_alnum($searchword)) {
 						}
 					}
 				}
+				echo "</div>";
+				echo "<div class='col-lg-2'></div>";
 				// 次の検索結果レコードがある場合
 				if ($word_count != $row_count) {
-					echo "</div>";
+
 					echo "</div>";
 				}
 				$word_count++;
