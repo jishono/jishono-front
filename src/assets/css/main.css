@@ -1,0 +1,84 @@
+html {
+	overflow-y: scroll;
+}
+
+.ja {
+	font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif;
+	font-weight: 500;
+	font-size: 18px;
+}
+
+.no {
+	font-family: 'Roboto', sans-serif;
+}
+
+.no-serif {
+	font-family: 'Roboto Slab', serif;
+}
+
+.logo {
+	max-height: 5em;
+	max-width: 70%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.card,
+.card-header {
+	border-style: none !important;
+}
+
+.card {
+	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.4);
+	border-radius: 1em !important;
+}
+
+.card-header {
+	border-top-left-radius: 1em !important;
+	border-top-right-radius: 1em !important;
+}
+
+.hatsuon,
+.hinshi {
+	font-size: 1em !important;
+}
+
+.kotoba {
+	font-size: 1.5em !important;
+}
+
+.imi-count {
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.table {
+	table-layout: fixed;
+}
+
+.table-header {
+	color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, .03);
+	font-weight: normal;
+	border-style: none !important;
+}
+
+.table-content {
+	color: rgba(0, 0, 0, 1);
+	border-style: none;
+}
+
+.input-group.input-group-unstyled input.form-control {
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+.input-group-unstyled .input-group-addon {
+    border-radius: 4px;
+    border: 0px;
+    background-color: transparent;
+}
