@@ -22,23 +22,11 @@
         <input
           v-model="q"
           autofocus
-          class="input-lg form-control no border-right-0 border"
+          class="input-lg form-control"
           placeholder='検索ワード (半角英数字)'
           type="text"
           title="半角英数字で入力して下さい。"
-          autocomplete="off"
-          @keypress.enter="getSearchResults"
         >
-        <span class="input-group-append">
-          <div
-            class="input-group-text bg-transparent"
-            style="cursor: pointer"
-            @click="getSearchResults"
-            
-          >
-            <i class="fa fa-search"></i>
-          </div>
-        </span>
       </div>
       <div class='col-lg'></div>
     </div>
@@ -46,8 +34,12 @@
       class='row my-4 ja'
       id='number'
     >
-      <div v-if="q.length > 0" class='col text-center'>該当件数: {{filteredResults.length}}</div>
+      <div v-if="q.length > 1" class='col text-center'>該当件数: {{filteredResults.length}}</div>
     </div>
+    <span>もしかして...</span>
+    <span v-for="suggestion in suggestions" :key=suggestion.oppslag>
+      {{ suggestion.oppslag }}, 
+    </span>
     <div id='result-container'>
       <div
         v-for="result in filteredResults"
@@ -116,7 +108,7 @@ export default {
   },
   methods: {
     getSuggestionList () {
-      api.get('/suggestion_list')
+      api.get('/suggestion_list?q=' + this.q)
         .then(response => {
           this.suggestions = response.data
         })
@@ -159,10 +151,16 @@ export default {
   mounted () {
     //this.getSuggestionList()
     this.getSearchResults()
+console.log(this.$route.params)
   },
   watch: {
     q: function(val) {
       this.q = val.toLowerCase()
+    },
+    filteredResults(filteredArray) {
+      if (this.q.length > 1 && filteredArray.length === 0) {
+        this.getSuggestionList()
+      }
     }
   }
 }
