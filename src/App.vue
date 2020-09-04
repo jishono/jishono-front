@@ -1,18 +1,5 @@
 <template>
   <div id="app">
-    <Search />
-    <Footer />
+    <router-view/>
   </div>
 </template>
-
-<script>
-import Footer from './components/Footer'
-import Search from './components/Search'
-
-export default {
-  name: 'App',
-  components: {
-    Footer, Search
-  }
-}
-</script>

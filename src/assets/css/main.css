@@ -2,6 +2,13 @@ html {
 	overflow-y: scroll;
 }
 
+input,textarea {
+	width:100%;
+	display:block }
+
+#app {
+	width: 100vw;
+}
 .ja {
 	font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif;
 	font-weight: 500;
@@ -14,6 +21,11 @@ html {
 
 .no-serif {
 	font-family: 'Roboto Slab', serif;
+}
+
+input::placeholder
+{
+    font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif;
 }
 
 .logo {
@@ -60,7 +72,7 @@ html {
 	table-layout: fixed;
 }
 
-.table-header {
+th {
 	color: rgba(0, 0, 0, 0.6);
 	background-color: rgba(0, 0, 0, .03);
 	font-weight: normal;
@@ -82,3 +94,45 @@ html {
     border: 0px;
     background-color: transparent;
 }
+
+
+.form-control.error {
+	border-color: #E84444;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(232,68,68,.6);
+  }
+
+  .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+  	width: 100%;
+	z-index: 98;
+	background-color: rgba(0, 0, 0, 0.3);
+   }
+   
+   .conjugation-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 99;
+	
+	width: 100%;
+	max-width: 600px;
+	background-color: #FFF;
+	border-radius: 16px;	
+	padding: 25px;
+   }
+   
+   .fade-enter-active,
+   .fade-leave-active {
+	transition: opacity .5s;
+   }
+   
+   .fade-enter,
+   .fade-leave-to {
+	opacity: 0;
+   }
