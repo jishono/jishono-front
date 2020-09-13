@@ -1,21 +1,44 @@
 html {
 	overflow-y: scroll;
+	margin-left: calc(100vw - 100%);
 }
 
-input,textarea {
-	width:100%;
-	display:block }
-
-#app {
-	width: 100vw;
+input, textarea {
+	width: 100%;
+	display: block
 }
+
 .ja {
-	font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif;
+	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 18px !important;
 }
 
 .no {
+	font-family: 'Roboto', sans-serif;
+}
+
+.ja-example {
+	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
+	font-weight: 500;
+	font-size: 16px !important;
+}
+
+.ja-kanren {
+	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
+	font-weight: 500;
+	font-size: 14px !important;
+}
+
+.hover-glow:hover>.progress {
+	box-shadow: 0px 10px 20px rgb(167, 167, 167);
+}
+
+.progress-bar {
+	background-color: rgb(90, 145, 247) !important;
+}
+
+.no-example {
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -23,9 +46,50 @@ input,textarea {
 	font-family: 'Roboto Slab', serif;
 }
 
-input::placeholder
-{
-    font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif;
+input::placeholder {
+	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
+}
+
+.pill-button {
+	background-color: #f53939e7;
+	color: white;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.pill-button:hover {
+	background-color: #c91e1ee7;
+	color: white;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+	background-color: rgb(90, 145, 247) !important;
+	border-color: rgb(90, 145, 247);
+	outline: 0;
+}
+
+.btn-primary:hover {
+	background-color: rgb(124, 166, 243) !important;
+	border-color:  rgb(124, 166, 243) !important;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited {
+	background-color: rgb(90, 145, 247) !important;
+}
+
+.btn-outline-primary {
+	border-color: rgb(90, 145, 247) !important;
+	color: rgb(90, 145, 247);
+}
+
+.fa-chevron-left {
+	font-size: 12px;
+	padding-top: 4px;
+}
+
+.fa-chevron-right {
+	font-size: 12px;
+	padding-top: 4px;
 }
 
 .logo {
@@ -40,8 +104,7 @@ input::placeholder
 	cursor: pointer;
 }
 
-.card,
-.card-header {
+.card, .card-header {
 	border-style: none !important;
 }
 
@@ -55,8 +118,7 @@ input::placeholder
 	border-top-right-radius: 1em !important;
 }
 
-.hatsuon,
-.hinshi {
+.hatsuon, .hinshi {
 	font-size: 1em !important;
 }
 
@@ -68,15 +130,27 @@ input::placeholder
 	color: rgba(0, 0, 0, 0.6);
 }
 
-.table {
-	table-layout: fixed;
-}
-
 th {
 	color: rgba(0, 0, 0, 0.6);
 	background-color: rgba(0, 0, 0, .03);
 	font-weight: normal;
 	border-style: none !important;
+	white-space: nowrap;
+}
+
+.th-wrap {
+	white-space: normal;
+}
+
+table {
+	margin-bottom: 0px !important
+}
+
+td {
+	white-space: nowrap;
+	text-align: center;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
 }
 
 .table-content {
@@ -84,55 +158,111 @@ th {
 	border-style: none;
 }
 
-.input-group.input-group-unstyled input.form-control {
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
-}
-.input-group-unstyled .input-group-addon {
-    border-radius: 4px;
-    border: 0px;
-    background-color: transparent;
+.rotate-container {
+	justify-content: center;
+	vertical-align: middle !important;
+	width: 20px;
 }
 
+.rotate-container>span {
+	writing-mode: vertical-rl;
+	text-align: justify;
+}
+
+.input-group.input-group-unstyled input.form-control {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.input-group-unstyled .input-group-addon {
+	border-radius: 4px;
+	border: 0px;
+	background-color: transparent;
+}
 
 .form-control.error {
 	border-color: #E84444;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(232,68,68,.6);
-  }
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(232, 68, 68, .6);
+}
 
-  .modal-overlay {
+.modal-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	height: 100%;
-  	width: 100%;
+	width: 100%;
 	z-index: 98;
 	background-color: rgba(0, 0, 0, 0.3);
-   }
-   
-   .conjugation-modal {
-	position: fixed;
+}
+
+.conjugation-modal {
+	position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 99;
-	
-	width: 100%;
-	max-width: 600px;
+	display: table;
 	background-color: #FFF;
-	border-radius: 16px;	
-	padding: 25px;
-   }
-   
-   .fade-enter-active,
-   .fade-leave-active {
+	border-radius: 16px;
+	font-size: 12px;
+}
+
+.vipps-modal {
+	position: absolute;
+	width: 90%;
+	max-width: 520px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 99;
+	display: block;
+	background-color: #FFF;
+	border-radius: 16px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.table-wrapper {
+	overflow-y: auto;
+	height: 100%;
+}
+
+.conjugation-box {
+	font-size: 12px;
+}
+
+@media (min-width: 544px) {
+	.conjugation-modal {
+		font-size: 16px;
+	}
+}
+
+@media (min-width: 544px) {
+	.conjugation-box {
+		font-size: 16px;
+	}
+}
+
+.fade-enter-active, .fade-leave-active {
 	transition: opacity .5s;
-   }
-   
-   .fade-enter,
-   .fade-leave-to {
+}
+
+.fade-enter, .fade-leave-to {
 	opacity: 0;
-   }
+}
+
+.donate-text {
+	font-size: 12px;
+}
+
+.about-box {
+	border-radius: 25px;
+	border: 2px solid #979797;
+	padding: 20px;
+	max-width: 600px;
+}

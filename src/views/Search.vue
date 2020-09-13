@@ -1,17 +1,9 @@
 <template>
-  <div class='container-fluid'>
+  <div>
     <div
-      class='row'
-      id='header'
+      id="inputfield"
+      style="min-height: 10px;"
     >
-      <div class='col'>
-        <img
-          class='logo my-4'
-          src='@/assets/jisho_logo_beta.png'
-          @click="q = ''"
-          style="cursor: pointer;"
-        />
-      </div>
     </div>
     <div class='row'>
       <div class='col-xs-2 col-lg-3'></div>
@@ -23,15 +15,25 @@
           <div class="col">
             <div class='input-group '>
               <input
-                v-model="q"
+                :value="q"
+                v-on:input="q = $event.target.value"
                 ref="search"
                 autofocus
-                name="search"
+                id="search"
                 class="input-lg form-control"
                 placeholder='ノルウェー語の検索ワード'
                 type="text"
                 v-bind:class="{'form-control': true, 'error': !valid }"
               >
+              <button
+                v-if="this.q != ''"
+                class="btn bg-transparent"
+                style="margin-left: -40px; z-index: 100; "
+                @click="q = ''"
+                tabindex="1"
+              >
+                <i class="fa fa-times"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -68,40 +70,17 @@
         </div>
 
         <div
-          v-for="result in filteredResults"
+          v-for="(result,index) in filteredResults"
           :key="result.lemma_id"
           class='row my-2'
         >
           <div class="col px-2">
-            <div class='card my-2'>
-              <div class='card-header py-1'>
-                <div class='row'>
-                  <div class=' col-md-4 text-center kotoba my-auto no'>{{ result.oppslag }}</div>
-                  <div class='col-6 col-md-4 text-md-center text-left m-auto'>
-                    <span class="hatsuon ja">発音:</span> <span
-                      class='no'
-                      v-if="result.uttale.length > 0"
-                    >{{result.uttale[0].transkripsjon}}</span></div>
-                  <div class='col-6 col-md-4 text-md-center text-right hinshi m-auto ja'>
-                    <span @click="openModal(result.lemma_id, result.oppslag, result.boy_tabell)">{{ partsOfSpeech[result.boy_tabell]}}
-                      <span v-if="result.boy_tabell === 'subst'">{{ getGender(result.pos)}}
-                      </span></span>
-                  </div>
-                </div>
-              </div>
-              <div class='imi my-3 ja'>
-                <div
-                  v-for="def in result.definisjoner"
-                  :key="def.def_id + def.definisjon"
-                >
-                  <span class='imi-count ml-4 mr-2'>{{def.prioritet}}.</span>
-                  <span
-                    v-html="addFurigana(def.definisjon)"
-                    class='imi'
-                  ></span><br>
-                </div>
-              </div>
-            </div>
+            <ResultBox
+              v-bind:word="result"
+              @get-example-sentences="getExampleSentences(result.lemma_id, index)"
+              @get-conjugations="openModal(result.lemma_id, result.oppslag, result.boy_tabell)"
+              @kanren-click="handleKanrenClick"
+            />
           </div>
         </div>
       </div>
@@ -115,17 +94,17 @@
       v-on:close="closeModal"
     ></ConjugationModal>
   </div>
-
 </template>
 
 <script>
 import api from '../api.js'
-import ConjugationModal from './ConjugationModal'
+import ConjugationModal from '../components/ConjugationModal'
+import ResultBox from '../components/ResultBox'
 
 export default {
   name: "Search",
   components: {
-    ConjugationModal
+    ConjugationModal, ResultBox
   },
   data () {
     return {
@@ -137,19 +116,7 @@ export default {
       currentWordID: null,
       currentWord: null,
       currentpos: null,
-      partsOfSpeech: {
-        verb: "動詞",
-        adj: "形容詞",
-        preposisjon: "前置詞",
-        interjeksjon: "感動詞",
-        prefiks: "接頭辞",
-        adv: "副詞",
-        det: "限定詞",
-        subjunksjon: "関係詞",
-        pron: "代名詞",
-        konjunksjon: "接続詞",
-        subst: "名詞"
-      },
+
     }
   },
   methods: {
@@ -159,8 +126,8 @@ export default {
           this.suggestions = response.data
         })
     },
-    getSearchResults () {
-      api.get('/search?q=' + this.q)
+    getAllItems () {
+      api.get('/items/all')
         .then(response => {
           this.results = response.data
         })
@@ -169,14 +136,28 @@ export default {
       if (this.q.length === 0) {
         return true
       }
-      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.]+$/)
+      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.-]+$/)
       return matches ? true : false
+    },
+    getExampleSentences (lemma_id, index) {
+      if (!this.filteredResults[index].example_sentences) {
+        api.get('/example_sentences/' + lemma_id)
+          .then(response => {
+            this.$set(this.filteredResults[index], 'example_sentences', response.data)
+          })
+      }
     },
     searchSuggestion (suggestion) {
       this.q = suggestion
-      this.$nextTick(() => this.$refs.search.focus())
+      this.$nextTick(() => {
+        this.$refs.search.focus({
+          preventScroll: true
+        })
+      })
     },
-
+    handleKanrenClick (query) {
+      this.q = query
+    },
     openModal (wordID, word, pos) {
       this.showDialog = true
       this.currentWordID = wordID
@@ -191,42 +172,8 @@ export default {
       this.currentWord = null
       document.documentElement.style.overflow = 'auto'
     },
-    getGender (posArray) {
-      let pos
-      for (pos of posArray) {
-        if (pos.includes('f')) {
-          return '(女)'
-        }
-      }
-      for (pos of posArray) {
-        if (pos.includes('n')) {
-          return '(中)'
-        }
-        if (pos.includes('m')) {
-          return '(男)'
-        }
-      }
-      return ''
-    },
-    addRuby (str) {
-      const kanji = str.match(/.*?(?=\[)/)
-      const furigana = str.match(/(?<=\[).*(?=\])/)
-      return `<ruby>${kanji}<rp>(</rp><rt>${furigana}</rt><rp>)</rp></ruby>`
-    },
-    addFurigana (str) {
-      if (!str.match(/\[/)) {
-        return str
-      }
-      const regex = new RegExp(/[^）、]*?\]/g)
-      const matches = str.match(regex)
-      let final_string = str
-      if (matches) {
-        matches.forEach(match => {
-          final_string = final_string.replace(match, this.addRuby(match))
-        })
-      }
-      return final_string
-    }
+
+
   },
   computed: {
     filteredResults () {
@@ -257,25 +204,31 @@ export default {
       return filtered
     },
   },
-  mounted () {
-    this.getSearchResults()
+  created () {
+    this.getAllItems()
     this.q = this.$route.params.query || ''
   },
   watch: {
     q: function (val) {
       this.valid = this.validate()
-      if (this.valid) {
+      if (this.valid && this.q.length > 0) {
         this.q = val.toLowerCase()
         this.$router.push('/search/' + val, () => { })
         this.getSuggestionList()
+        var scrollElement
+      }
+      if (val != '' && window.screen.width < 600) {
+        scrollElement = document.getElementById("inputfield");
+        scrollElement.scrollIntoView();
+      } else {
+        window.scrollTo(0,0);
       }
     },
-    /*    filteredResults (filteredArray) {
-         this.suggestions = []
-         if (this.q.length > 1 && filteredArray.length === 0) {
-           this.getSuggestionList()
-         }
-       } */
+    $route (to) {
+      if (to.path === '/search/') {
+        this.q = ''
+      }
+    }
   }
 }
 </script>

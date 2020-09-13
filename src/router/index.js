@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -8,13 +8,13 @@ Vue.use(VueRouter)
   {
     path: '/',
     alias: '/search',
-    name: 'Home',
-    component: Home
+    name: 'Search',
+    component: Search
   },
   {
     path: '/search/:query',
-    name: 'Home',
-    component: Home
+    name: 'Search',
+    component: Search
   },
 
   {
