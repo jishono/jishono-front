@@ -4,7 +4,7 @@ import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     alias: '/search',
@@ -20,8 +20,11 @@ Vue.use(VueRouter)
   {
     path: '/about',
     name: 'About',
-
     component: () => import('../views/About.vue')
+  },
+  {
+    path: '*',
+    component: Search
   }
 ]
 

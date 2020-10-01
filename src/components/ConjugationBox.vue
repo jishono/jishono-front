@@ -5,10 +5,7 @@
   >
     <div
       v-for="
-    (part,
-    i)
-    in
-    twoAndTwo"
+    (part,i) in twoAndTwo"
       :key="i"
       class="my-2"
     >
@@ -63,7 +60,7 @@
             class="text-center"
           >{{ pattern.pos}}</th>
         </tr>
-        <tr style='border-top-style: solid; border-top-width: thin; '>
+        <tr>
           <th
             rowspan='3'
             class='rotate-container th-wrap'
@@ -90,7 +87,7 @@
             :key="pattern.paradigme + 'be_en'"
           >{{ pattern.bestemt_entall}}</td>
         </tr>
-        <tr style='border-top-style: solid; border-top-width: thin;'>
+        <tr class="border-top">
           <th rowspan='1'></th>
           <th>複数形</th>
           <td
@@ -98,7 +95,7 @@
             :key="pattern.paradigme + 'f'"
           >{{ pattern.flertall}}</td>
         </tr>
-        <tr style='border-top-style: solid; border-top-width: thin;'>
+        <tr class="border-top">
           <th rowspan='3'></th>
           <th>比較級</th>
           <td
@@ -298,10 +295,10 @@
             :key="pattern.paradigme + 'imperativ'"
           >{{ pattern.imperativ}}</td>
         </tr>
-        <tr style='border-top-style: solid; border-top-width: thin;'>
+        <tr class="border-top">
           <th
             rowspan='4'
-            class='rotate-container th-wrap'
+            class='rotate-container th-wrap pl-2'
           >
             <div>完了分詞形</div>
           </th>

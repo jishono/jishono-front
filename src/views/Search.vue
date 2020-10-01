@@ -80,6 +80,7 @@
               @get-example-sentences="getExampleSentences(result.lemma_id, index)"
               @get-conjugations="openModal(result.lemma_id, result.oppslag, result.boy_tabell)"
               @kanren-click="handleKanrenClick"
+              @feedback-click="openFeedbackDialog(result.lemma_id, result.oppslag, result.definisjoner)"
             />
           </div>
         </div>
@@ -93,6 +94,70 @@
       v-bind:word="currentWord"
       v-on:close="closeModal"
     ></ConjugationModal>
+    <transition
+      name="fade"
+      appear
+    >
+      <div
+        class="modal-overlay"
+        v-if="showFeedbackDialog"
+        @click.self="showFeedbackDialog = false"
+      >
+        <div class="vipps-modal">
+          <div class="text-right mb-2">
+            <span
+              class="float-left"
+              style="font-weight: bold"
+            >フィードバック</span>
+            <button
+              class="btn bg-transparent p-0"
+              style="margin-top: -16px"
+              @click="showFeedbackDialog = false"
+            >
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+          <div>単語：{{currentWord}}</div>
+          <div
+            v-for="def in this.currentDefinitions"
+            :key="def.def_id"
+          >
+            <span>{{def.prioritet}}. {{def.definisjon}}</span>
+          </div>
+          <p class="mt-3"></p>
+          <textarea
+            v-model="feedback"
+            class="form-control mt-6"
+            rows="5"
+            maxlength="500"
+            placeholder="訳や例文に誤訳、誤字などがありましたらお知らせください"
+          ></textarea>
+          <div class="row no-gutters mt-2">
+            <div class="col text-right d-flex justify-content-between align-items-center">
+              <span class="float-left donate-text ">
+                辞書作りに興味ありますか？<a
+                  href="https://baksida.jisho.no/om"
+                  target="_blank"
+                >Baksida</a>でjisho.noを改善していきましょう！
+              </span>
+              <button
+                class="btn btn-sm shadow-none btn-outline-primary"
+                type="button"
+                @click="sendFeedback"
+              >
+                <span>
+                  送信
+                </span>
+              </button>
+
+            </div>
+          </div>
+          <div class="row no-gutters">
+
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -113,8 +178,11 @@ export default {
       q: '',
       valid: true,
       showDialog: false,
+      showFeedbackDialog: false,
+      feedback: "",
       currentWordID: null,
       currentWord: null,
+      currentDefinitions: null,
       currentpos: null,
 
     }
@@ -157,6 +225,29 @@ export default {
     },
     handleKanrenClick (query) {
       this.q = query
+    },
+    openFeedbackDialog (wordID, word, definitions) {
+      this.showFeedbackDialog = true
+      this.currentWordID = wordID
+      this.currentWord = word
+      this.currentDefinitions = definitions
+      this.feedback = ""
+    },
+    closeFeedbackDialog () {
+      this.showFeedbackDialog = false
+      this.currentWordID = null
+      this.currentWord = null
+      this.currentDefinitions = null
+      this.feedback = ""
+    },
+    sendFeedback () {
+      api.post('/feedback', {
+        wordID: this.currentWordID,
+        feedback: this.feedback
+      })
+        .then(() => {
+          this.closeFeedbackDialog()
+        })
     },
     openModal (wordID, word, pos) {
       this.showDialog = true
@@ -221,7 +312,7 @@ export default {
         scrollElement = document.getElementById("inputfield");
         scrollElement.scrollIntoView();
       } else {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
       }
     },
     $route (to) {

@@ -70,7 +70,7 @@ input::placeholder {
 
 .btn-primary:hover {
 	background-color: rgb(124, 166, 243) !important;
-	border-color:  rgb(124, 166, 243) !important;
+	border-color: rgb(124, 166, 243) !important;
 }
 
 .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited {
@@ -143,7 +143,7 @@ th {
 }
 
 table {
-	margin-bottom: 0px !important
+	margin-bottom: 0px !important;
 }
 
 td {
@@ -151,6 +151,12 @@ td {
 	text-align: center;
 	padding-left: 10px !important;
 	padding-right: 10px !important;
+}
+
+.border-top {
+	border-top-style: solid;
+	border-top-width: thin;
+	border-top-color: #dee2e6;
 }
 
 .table-content {

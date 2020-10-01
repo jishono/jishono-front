@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class='container-fluid'>
-    <Header />
-    <keep-alive>
-      <router-view />
+      <Header />
+      <keep-alive>
+        <router-view />
       </keep-alive>
     </div>
     <Footer />

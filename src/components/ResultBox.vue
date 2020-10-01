@@ -84,10 +84,6 @@
           data-toggle="collapse"
           @click="getExampleSentences(); showingExamples = !showingExamples"
         >
-          <!--           <span
-            v-if="loading"
-            class="spinner-border spinner-border-sm"
-          ></span> -->
           <span v-if="!loading">
             例文
           </span>
@@ -103,10 +99,17 @@
             活用
           </span>
         </button>
+        <button
+          class="btn btn-sm btn-outline-primary shadow-none mb-2 ml-1"
+          type="button"
+          @click="$emit('feedback-click')"
+        >
+          <i class="fa fa-comment-o" style="font-size: 18px"></i>
+        </button>
       </div>
     </div>
     <div
-      class='collapse text-left ml-2 mb-2'
+      class='collapse text-left ml-2 mr-3 mb-2'
       :id="'collapse' + word.lemma_id"
     >
       <div
@@ -129,7 +132,7 @@
 
       <div
         v-if="word.example_sentences && word.example_sentences.length === 0"
-        class="ja"
+        class="ja ml-2"
       >例文の登録がありません。</div>
     </div>
     <div
