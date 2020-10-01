@@ -133,17 +133,19 @@
             placeholder="訳や例文に誤訳、誤字などがありましたらお知らせください"
           ></textarea>
           <div class="row no-gutters mt-2">
-            <div class="col text-right d-flex justify-content-between align-items-center">
-              <span class="float-left donate-text ">
-                辞書作りに興味ありますか？<a
+            <div class="col d-flex justify-content-between align-items-center">
+              <span class="donate-text ">
+                辞書作りに興味ありますか？
+                <a
                   href="https://baksida.jisho.no/om"
                   target="_blank"
                 >Baksida</a>でjisho.noを改善していきましょう！
               </span>
               <button
-                class="btn btn-sm shadow-none btn-outline-primary"
+                class="btn btn-sm shadow-none btn-outline-primary ml-2"
                 type="button"
                 @click="sendFeedback"
+                style="min-width: 50px"
               >
                 <span>
                   送信
