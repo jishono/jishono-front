@@ -155,7 +155,6 @@
             </div>
           </div>
           <div class="row no-gutters">
-
           </div>
         </div>
       </div>
@@ -304,11 +303,11 @@ export default {
   watch: {
     q: function (val) {
       this.valid = this.validate()
+      var scrollElement
       if (this.valid && this.q.length > 0) {
         this.q = val.toLowerCase()
         this.$router.push('/search/' + val, () => { })
         this.getSuggestionList()
-        var scrollElement
       }
       if (val != '' && window.screen.width < 600) {
         scrollElement = document.getElementById("inputfield");
