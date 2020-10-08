@@ -87,13 +87,6 @@
       </div>
       <div class='col-xs-2 col-lg-3'></div>
     </div>
-    <ConjugationModal
-      v-bind:show="showDialog"
-      v-bind:wordID="currentWordID"
-      v-bind:pos="currentpos"
-      v-bind:word="currentWord"
-      v-on:close="closeModal"
-    ></ConjugationModal>
     <transition
       name="fade"
       appear
@@ -164,13 +157,12 @@
 
 <script>
 import api from '../api.js'
-import ConjugationModal from '../components/ConjugationModal'
 import ResultBox from '../components/ResultBox'
 
 export default {
   name: "Search",
   components: {
-    ConjugationModal, ResultBox
+    ResultBox
   },
   data () {
     return {
@@ -250,22 +242,6 @@ export default {
           this.closeFeedbackDialog()
         })
     },
-    openModal (wordID, word, pos) {
-      this.showDialog = true
-      this.currentWordID = wordID
-      this.currentpos = pos
-      this.currentWord = word
-      document.documentElement.style.overflow = 'hidden'
-    },
-    closeModal () {
-      this.showDialog = false
-      this.currentWordID = null
-      this.currentpos = null
-      this.currentWord = null
-      document.documentElement.style.overflow = 'auto'
-    },
-
-
   },
   computed: {
     filteredResults () {

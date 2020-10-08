@@ -14,7 +14,7 @@
           >未登録</span>
         </div>
         <div class='col-6 col-md-4 text-md-center text-right hinshi m-auto ja'>
-          <span @click="$emit('get-conjugations')">{{ partsOfSpeech[word.boy_tabell]}}
+          <span>{{ partsOfSpeech[word.boy_tabell]}}
             <span v-if="word.boy_tabell === 'subst'">{{ getGender(word.pos)}}
             </span></span>
         </div>
@@ -152,7 +152,6 @@
 </template>
 
 <script>
-//import api from '../api.js'
 import ConjugationBox from './ConjugationBox'
 
 export default {
