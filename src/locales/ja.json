@@ -1,0 +1,120 @@
+{
+    "footer": {
+        "oneliner": "jisho.no - ノルウェー語→日本語のオンライン辞書",
+        "about": "jisho.noについて",
+        "vipps": "寄付はVippsで",
+        "goal": "2020年の募金目標額"
+    },
+    "vipps_dialog": {
+        "headline": "jisho.noの募金運動",
+        "p1": "jisho.noは100%ボランティア・非営利のプロジェクトであるため、 サーバーやドメイン名への支払いはユーザーの方々からのサポートにかかっています。 規模の大小を問わず全ての寄付をお受けし、全額をプロジェクトそのものに対して使用します。",
+        "p2": "恐れ入りますが、今のところVippsでのお支払いのみ受け付けております。"
+    },
+    "feedback": {
+        "title": "フィードバック",
+        "placeholder": "訳や例文に誤訳、誤字などがありましたらお知らせください",
+        "baksida": "辞書作りに興味ありますか？ <a href='https://baksida.jisho.no' target='_blank'>Baksida</a>でjisho.noを改善していきましょう！",
+        "send": "送信"
+    },
+    "interface": {
+        "search_placeholder": "ノルウェー語の検索ワード",
+        "warning": "半角英数字で入力して下さい",
+        "pronounciation": "発音",
+        "examples": "例文",
+        "conjugation": "活用",
+        "related": "関連語：",
+        "suggestion": "もしかして",
+        "request_button": "の翻訳を依頼",
+        "request_sent": "翻訳依頼を送信しました！"
+    },
+    "words": {
+        "word": "単語:",
+        "pos": {
+            "adj": "形容詞",
+            "adv": "副詞",
+            "det": "限定詞",
+            "interjeksjon": "感動詞",
+            "konjunksjon": "接続詞",
+            "prefiks": "接頭辞",
+            "preposisjon": "前置詞",
+            "pron": "代名詞",
+            "subjunksjon": "関係詞",
+            "subst": "名詞",
+            "verb": "動詞"
+        },
+        "gender": {
+            "m": "男",
+            "f": "女",
+            "n": "中"
+        },
+        "conjugations": {
+            "normal": "普通形",
+            "adj": {
+                "entall": "単数形",
+                "m_entall": "男・女性形",
+                "n_entall": "中性形",
+                "bestemt_entall": "既知形",
+                "flertall": "複数形",
+                "komparativ": "比較級",
+                "superlativ": "最上級",
+                "superlativ_bestemt": "最上級既知形"
+            },
+            "adv": {
+                "positiv": "普通形",
+                "komparativ": "比較級",
+                "superlativ": "最上級"
+            },
+            "det": {
+                "entall": "単数形",
+                "m_entall": "男性",
+                "f_entall": "女性",
+                "n_entall": "中性",
+                "bestemt_entall": "既知形",
+                "flertall": "複数形"
+            },
+            "pron": {
+                "subjektsform": "主格",
+                "objektsform": "目的格"
+            },
+            "subst": {
+                "ubestemt_entall": "未知単数形",
+                "bestemt_entall": "既知単数形",
+                "ubestemt_flertall": "未知複数形",
+                "bestemt_flertall": "既知複数形"
+            },
+            "verb": {
+                "infinitiv": "不定形",
+                "presens": "現在形",
+                "preteritum": "過去形",
+                "presens_perfektum": "現在完了形",
+                "imperativ": "命令形",
+                "perfektum": "完了分詞形",
+                "perf_part_mf": "男・女性形",
+                "perf_part_n": "中性形",
+                "perf_part_bestemt": "既知形",
+                "perf_part_flertall": "複数形",
+                "presens_partisipp": "現在分詞形"
+            }
+        }
+    },
+    "about": {
+        "p1": {
+            "title": "jisho.noとは何ですか？",
+            "text": "jisho.noは、ノルウェー語・日本語のオンライン辞書です。ノルウェー語の単語を入力すると、日本語訳や例文が表示されます。全ての訳とウェブページ自体が、多くの人に便利だと感じてもらえるような辞書作りに楽しみと意義を感じる有志によって作られています。"
+        },
+        "p2": {
+            "title": "私も貢献できますか？",
+            "text": "どなたでも貢献いただけます！ 翻訳や品質向上をサポートしたい方は、<a href='https://baksida.jisho.no' target='_blank'>Baksida</a>をご確認ください。また誤りを見つけた場合や翻訳に対してコメントする際は、コメントボタンをお使いください。"
+        },
+        "p3": {
+            "title": "寄付は受け付けていますか？",
+            "text": "喜んでお受けします！jisho.noは100%ボランティア・非営利のプロジェクトであるため、サーバーやドメイン名への支払いはユーザーの方々からのサポートにかかっています。規模の大小を問わず全ての寄付をお受けし、全額をプロジェクトそのものに対して使用します。将来的に必要以上の額が集まった場合は、寄付の受付を停止します。詳細はページ下の募金プログレスバーをクリックしてください"
+        },
+        "p4": {
+            "title": "jisho.noの管理者は誰ですか？",
+            "text": "翻訳作業をしてくれているボランティアのほかに下記のメンバーが、編集責任がありコーディングとサーバー管理を行っているコアチームです。",
+            "list": "<ul> <li> Per Gunnar Paulsen (主要責任者、編集者兼Baksida管理者、コーディング担当) </li> <li>Petter Mæhlum (編集者兼Baksida管理者)</li> <li> Patrick Auri (コーディング担当、デザイン担当) </li> <li> Stian Frøystein (サーバー担当) </li> <li> Takaaki Yoshikawa (コーディング担当、サイトの日本語訳担当) </li> </ul>",
+            "contact": "プロジェクトへのご質問は admin (アットマーク) jisho.no　までお寄せください。"
+        }
+    }
+}

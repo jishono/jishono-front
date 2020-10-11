@@ -18,6 +18,10 @@ input, textarea {
 	font-family: 'Roboto', sans-serif;
 }
 
+.no-kanren {
+	font-size: 14px !important;
+}
+
 .ja-example {
 	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
 	font-weight: 500;
@@ -25,13 +29,13 @@ input, textarea {
 }
 
 .ja-kanren {
-	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
+	font-family: 'Roboto',sans-serif,'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
 	font-weight: 500;
 	font-size: 14px !important;
 }
 
-.hover-glow:hover>.progress {
-	box-shadow: 0px 10px 20px rgb(167, 167, 167);
+.hover-glow:hover {
+	transform: scale(1.05)
 }
 
 .progress-bar {
@@ -47,7 +51,7 @@ input, textarea {
 }
 
 input::placeholder {
-	font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
+	font-family: 'Roboto',sans-serif,'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', '游明朝', '游明朝体', YuMincho, 'Yu Mincho', 'ＭＳ 明朝', 'MS Mincho', HiraMinProN-W3, 'TakaoEx明朝', TakaoExMincho, 'MotoyaLCedar', 'Droid Sans Japanese', serif;
 }
 
 .pill-button {
@@ -60,6 +64,7 @@ input::placeholder {
 .pill-button:hover {
 	background-color: #c91e1ee7;
 	color: white;
+	transform: scale(1.05)
 }
 
 .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
@@ -73,13 +78,21 @@ input::placeholder {
 	border-color: rgb(124, 166, 243) !important;
 }
 
-.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited {
+.btn-outline-primary:hover:enabled, .btn-outline-primary:active, .btn-outline-primary:visited {
 	background-color: rgb(90, 145, 247) !important;
 }
 
 .btn-outline-primary {
 	border-color: rgb(90, 145, 247) !important;
-	color: rgb(90, 145, 247);
+}
+
+.btn-outline-primary.disabled {
+	border-color: rgb(90, 145, 247) !important;
+	color: rgb(90, 145, 247) !important;
+}
+
+.btn-outline-primary.disabled:hover {
+	background-color: white !important;
 }
 
 .fa-chevron-left {
@@ -271,4 +284,8 @@ td {
 	border: 2px solid #979797;
 	padding: 20px;
 	max-width: 600px;
+}
+
+.flag-icon:hover {
+	transform: scale(1.1)
 }

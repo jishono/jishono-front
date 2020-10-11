@@ -1,0 +1,120 @@
+{
+    "footer": {
+        "oneliner": "jisho.no - norsk-japansk nettordbok",
+        "about": "Om jisho.no",
+        "vipps": "Doner med Vipps",
+        "goal": "Innsamlingsmål 2020"
+    },
+    "vipps_dialog": {
+        "headline": "Donasjoner",
+        "p1": "Fordi jisho.no er et 100% frivillig non-profit prosjekt er vi avhengige av av brukernes hjelp for å betale servere og domener. Alle donasjoner, store og små, er velkomne og vil i sin helhet bli brukt til prosjektet.",
+        "p2": "Vi tar for tiden kun imot donasjoner på Vipps."
+    },
+    "feedback": {
+        "title": "Tilbakemelding",
+        "placeholder": "Si gjerne ifra her hvis du oppdager feil i oversettelser eller eksempler, eller har andre kommentarer til oppslaget.",
+        "baksida": "Interessert i å bidra til ordboka? Ta en titt på <a href='https://baksida.jisho.no' target='_blank'>Baksida</a>!",
+        "send": "Send"
+    },
+    "interface": {
+        "search_placeholder": "Søk på norsk",
+        "warning": "Bruk vanlige bokstaver fra alfabetet",
+        "pronounciation": "uttale",
+        "examples": "eksempler",
+        "conjugation": "bøyning",
+        "related": "Relaterte ord:",
+        "suggestion": "Mener du...",
+        "request_button": " -> Be om oversettelse",
+        "request_sent": "Ønske om oversettelse sendt!"
+    },
+    "words": {
+        "word": "Oppslag:",
+        "pos": {
+            "adj": "adjektiv",
+            "adv": "adverb",
+            "det": "determinativ",
+            "interjeksjon": "interjeksjon",
+            "konjunksjon": "konjunksjon",
+            "prefiks": "接頭辞",
+            "preposisjon": "preposisjon",
+            "pron": "pronomen",
+            "subjunksjon": "subjunksjon",
+            "subst": "substantiv",
+            "verb": "verb"
+        },
+        "gender": {
+            "m": "m",
+            "f": "f",
+            "n": "n"
+        },
+        "conjugations": {
+            "normal": "enkeltform",
+            "adj": {
+                "entall": "entall",
+                "m_entall": "han-/hunkjønn",
+                "n_entall": "intetkjønn",
+                "bestemt_entall": "bestemt form",
+                "flertall": "flertall",
+                "komparativ": "komparativ",
+                "superlativ": "superlativ",
+                "superlativ_bestemt": "superlativ, bestemt form"
+            },
+            "adv": {
+                "positiv": "positiv",
+                "komparativ": "komparativ",
+                "superlativ": "superlativ"
+            },
+            "det": {
+                "entall": "entall",
+                "m_entall": "hankjønn",
+                "f_entall": "hunkjønn",
+                "n_entall": "intetkjønn",
+                "bestemt_entall": "bestemt form",
+                "flertall": "flertall"
+            },
+            "pron": {
+                "subjektsform": "subjektsform",
+                "objektsform": "objektsform"
+            },
+            "subst": {
+                "ubestemt_entall": "ubestemt entall",
+                "bestemt_entall": "bestemt entall",
+                "ubestemt_flertall": "ubestemt flertall",
+                "bestemt_flertall": "bestemt flertall"
+            },
+            "verb": {
+                "infinitiv": "infinitiv",
+                "presens": "presens",
+                "preteritum": "preteritum",
+                "presens_perfektum": "presens perfektum",
+                "imperativ": "imperativ",
+                "perfektum": "perfektum partisipp",
+                "perf_part_mf": "hankjønn/hunkjønn",
+                "perf_part_n": "intetkjønn",
+                "perf_part_bestemt": "bestemt form",
+                "perf_part_flertall": "flertall",
+                "presens_partisipp": "presens partisipp"
+            }
+        }
+    },
+    "about": {
+        "p1": {
+            "title": "Hva er jisho.no?",
+            "text": "jisho.no en norsk-japansk nettordbok hvor du kan slå opp norske ord for å finne japanske oversettelser og eksempelsetninger. Alle oversettelsene og selve nettsiden er laget av frivillige som synes det er både gøy og givende å lage ei ordbok som mange kan ha nytte av."
+        },
+        "p2": {
+            "title": "Kan jeg også bidra?",
+            "text": "Alle som vil kan bidra! Ta en titt på <a href='https://baksida.jisho.no' target='_blank'>Baksida</a> hvis du er interessert i å hjelpe med oversettelser og kvalitetssikring av disse. Bruk også gjerne kommentar-knappen på hvert oppslag hvis du oppdager feil eller har kommentarer til oversettelsene."
+        },
+        "p3": {
+            "title": "Tar dere imot donasjoner?",
+            "text": "Det gjør vi gjerne! Siden jisho.no er et 100% frivillig non-profit prosjekt er vi avhengige av av brukernes hjelp for å betale servere og domener. Alle donasjoner, store og små, er velkomne og vil i sin helhet bli brukt til prosjektet. Skulle vi få inn mer enn vi trenger i overskuelig fremtid kommer vi til å stoppe å ta imot flere donasjoner. Klikk på elementet under denne boksen for mer info."
+        },
+        "p4": {
+            "title": "Hvem står bak jisho.no?",
+            "text": "I tillegg til alle de frivillige oversetterne er vi et kjerneteam av følgende personer som har overordnet redaksjonelt ansvar og som jobber med kode og server.",
+            "list": "<ul> <li> Per Gunnar Paulsen (hovedansvarlig, redaktør/admin på baksida, kode) </li> <li>Petter Mæhlum (redaktør/admin på baksida)</li> <li> Patrick Auri (kode, design) </li> <li> Stian Frøystein (server) </li> <li> Takaaki Yoshikawa (kode, japansk innhold) </li> </ul>",
+            "contact": "Alle spørsmål om prosjektet kan rettes til admin (alfakrøll) jisho.no"
+        }
+    }
+}

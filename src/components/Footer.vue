@@ -6,16 +6,14 @@
           class='text-center my-4 no mx-3'
           style="max-width: 400px; width: 100%;"
         >
-
           <div
-            @click="showModal = true"            
+            @click="showVippsDialog = true"
             style="cursor: pointer"
             class="hover-glow"
           >
             <div class="d-flex justify-content-between donate-text">
-
-              <span>寄付はVippsで</span>
-              <span>2020年の募金目標額</span>
+              <span>{{ $t('footer.vipps') }}</span>
+              <span>{{ $t('footer.goal') }}</span>
             </div>
             <div
               class="progress "
@@ -24,22 +22,26 @@
               <div
                 class="progress-bar "
                 role="progressbar"
-                :style="'width:' + progress + '%; min-width: 70px;'"
+                :style="'width:' + progress + '%; min-width: 80px;'"
               ><span>{{collected}} / {{goal}}kr</span>
               </div>
             </div>
           </div>
           <div
-            class="my-3"
+            class="mt-3"
+            style="font-size: 14px"
+          >
+            {{ $t('footer.oneliner') }}
+          </div>
+          <div
+            class="my-2"
             style="font-size: 16px"
           >
-
-           
             <div class="my-1">
-               <router-link
-              class="badge badge-pill pill-button mx-1"
-              to="/about"
-            >jisho.noについて</router-link>
+              <router-link
+                class="badge badge-pill pill-button mx-1"
+                to="/about"
+              >{{ $t('footer.about') }}</router-link>
               <a
                 href="https://github.com/jishono/"
                 target="_blank"
@@ -52,64 +54,60 @@
               >Baksida</a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div style="height: 800px">
-
-    </div>
-    <transition
-      name="fade"
-      appear
-    >
-      <div
-        class="modal-overlay"
-        v-if="showModal"
-        @click="showModal = false"
-      >
-        <div class="vipps-modal">
-          <div class="text-right mb-2">
-            <span class="float-left" style="font-weight: bold">jisho.noの募金運動</span>
-            <button
-              class="btn bg-transparent p-0" style="margin-top: -16px"
-              @click="showModal = false"
+          <div class="mt-3">
+            <img
+              class="flag-icon mx-1"
+              height="25px"
+              width="25px"
+              src="@/assets/japan-icon-border.png"
+              @click="setLocale('ja')"
             >
-              <i class="fa fa-times"></i>
-            </button>
+            <img
+              class="flag-icon mx-1"
+              height="25px"
+              width="25px"
+              bor
+              src="@/assets/norway-icon.png"
+              @click="setLocale('no')"
+            >
           </div>
-          <p>jisho.noは100%ボランティア・非営利のプロジェクトであるため、
-            サーバーやドメイン名への支払いはユーザーの方々からのサポートにかかっています。
-            規模の大小を問わず全ての寄付をお受けし、全額をプロジェクトそのものに対して使用します。
-          </p>
-          <p>
-            恐れ入りますが、今のところVippsでのお支払いのみ受け付けております。
-          </p>
-          <img
-            class="img-fluid text-center mt-4"
-            src='@/assets/vipps.png'
-          >
-
         </div>
       </div>
-    </transition>
+    </div>
+    <div style="
+              height:
+              800px">
+    </div>
+    <VippsDialog
+      v-bind:show="showVippsDialog"
+      @close-vipps-dialog="showVippsDialog = false"
+    />
   </footer>
 </template>
 
 <script>
 import api from '../api.js'
+import VippsDialog from '../components/VippsDialog'
 
 export default {
   name: 'Footer',
+  components: { VippsDialog },
   data () {
     return {
       collected: 45,
       goal: 1200,
-      showModal: false,
+      showVippsDialog: false,
     }
   },
   computed: {
     progress () {
       return this.collected / this.goal * 100
+    }
+  },
+  methods: {
+    setLocale (locale) {
+      this.$i18n.locale = locale
+      localStorage.setItem('locale', locale)
     }
   },
   mounted () {

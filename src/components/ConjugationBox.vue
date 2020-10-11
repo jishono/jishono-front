@@ -7,7 +7,8 @@
       v-if="!hasConjugation.includes(pos) || 
       (pos === 'adv' && conjugations[0].boy_skjema === '27') ||
       (pos === 'det' && ['28','49'].includes(conjugations[0].boy_skjema)) ||
-      (pos === 'pron' && conjugations[0].boy_skjema === '34')"
+      (pos === 'pron' && conjugations[0].boy_skjema === '34') ||
+      (pos === 'subst' && conjugations[0].boy_skjema === '36')"
       class='table table-sm table-bordered text-right'
     >
       <tr>
@@ -15,20 +16,7 @@
         <th class="text-center">{{ pos }}</th>
       </tr>
       <tr>
-        <th>普通形</th>
-        <td>{{ word }}</td>
-      </tr>
-    </table>
-    <table
-      v-else-if="pos === 'subst' && conjugations[0].boy_skjema === '36'"
-      class='table table-sm table-bordered text-right'
-    >
-      <tr>
-        <th></th>
-        <th class="text-center">活用不可</th>
-      </tr>
-      <tr>
-        <th>普通形</th>
+        <th>{{$t('words.conjugations.normal')}}</th>
         <td>{{ word }}</td>
       </tr>
     </table>
@@ -50,9 +38,10 @@
             :key="conjugation.pattern + conjugation.rowspan"
             class='rotate-container th-wrap pl-2'
           >
-            <div>{{conjugation.rowText}}</div>
+            <div v-if="conjugation.rowText">{{$t('words.conjugations.' + pos + '.' + conjugation.rowText )}}</div>
           </th>
-          <th style="width: 30%;">{{conjugation.text}}</th>
+          <th v-if="conjugation.pattern != 'pos'" style="width: 30%;">{{$t('words.conjugations.' + pos + '.' + conjugation.pattern )}}</th>
+          <th v-else style="width: 30%;"></th>
           <template v-for="pattern in divide">
             <th
               v-if="i2 == 0"
@@ -88,7 +77,7 @@ export default {
       patterns: {
         adj: [
           { text: '', pattern: 'pos', rowspan: 1 },
-          { text: '男・女性形', pattern: 'm_entall', rowspan: 3, rowText: "単数形" },
+          { text: '男・女性形', pattern: 'm_entall', rowspan: 3, rowText:'entall' },
           { text: '中性形', pattern: 'n_entall' },
           { text: '既知形', pattern: 'bestemt_entall' },
           { text: '複数形', pattern: 'flertall', rowspan: 1, borderTop: true },
@@ -103,11 +92,11 @@ export default {
           { text: '未知複数形', pattern: 'superlativ' },
         ],
         det: [
-          { text: '', pattern: 'pos' },
-          { text: '男性単数形', pattern: 'm_entall' },
+          { text: '', pattern: 'pos', rowspan: 1 },
+          { text: '男性単数形', pattern: 'm_entall', rowspan: 3, rowText: 'entall' },
           { text: '女性単数形', pattern: 'f_entall' },
           { text: '中性単数形', pattern: 'n_entall' },
-          { text: '複数形', pattern: 'flertall' },
+          { text: '複数形', pattern: 'flertall', rowspan: 2, borderTop: true },
           { text: '既知形', pattern: 'bestemt_entall' }
         ],
         pron: [
@@ -129,7 +118,7 @@ export default {
           { text: '過去形', pattern: 'preteritum' },
           { text: '現在完了形', pattern: 'presens_perfektum', prefix: 'har ' },
           { text: '命令形', pattern: 'imperativ' },
-          { text: '男・女性形', pattern: 'perf_part_mf', rowspan: 4, rowText: "完了分詞形", borderTop: true },
+          { text: '男・女性形', pattern: 'perf_part_mf', rowspan: 4, rowText: 'perfektum', borderTop: true },
           { text: '中性形', pattern: 'perf_part_n' },
           { text: '既知形', pattern: 'perf_part_bestemt' },
           { text: '複数形', pattern: 'perf_part_flertall' },

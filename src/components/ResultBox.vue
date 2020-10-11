@@ -4,18 +4,19 @@
       <div class='row'>
         <div class=' col-md-4 text-center kotoba my-auto no'>{{ word.oppslag }}</div>
         <div class='col-6 col-md-4 text-md-center text-left m-auto'>
-          <span class="hatsuon ja">発音:</span> <span
-            class='no'
-            v-if="word.uttale.length > 0"
-          >{{word.uttale[0].transkripsjon}}</span>
-          <span
-            class="hatsuon ja"
-            v-else
-          >未登録</span>
+          <div v-if="word.uttale.length > 0">
+            <span :class="$i18n.locale === 'ja' ? 'hatsuon ja' : 'no'">{{ $t('interface.pronounciation') }}:</span>
+            <span class='no'>
+              {{word.uttale[0].transkripsjon}}
+            </span>
+          </div>
         </div>
-        <div class='col-6 col-md-4 text-md-center text-right hinshi m-auto ja'>
-          <span>{{ partsOfSpeech[word.boy_tabell]}}
-            <span v-if="word.boy_tabell === 'subst'">{{ getGender(word.pos)}}
+        <div
+          class='col-6 col-md-4 text-md-center text-right m-auto'
+          v-if="word.boy_tabell"
+        >
+          <span :class="$i18n.locale === 'ja' ? 'hinshi ja' : 'no'">{{ $t('words.pos.' + word.boy_tabell) }}
+            <span v-if="word.boy_tabell === 'subst'">({{ $t('words.gender.' + getGender(word.pos)) }})
             </span></span>
         </div>
       </div>
@@ -44,7 +45,9 @@
       class='mx-3'
       v-if="word.relatert.length > 0"
     >
-      <span class='ja-kanren'>関連語：</span>
+      <span class="ja-kanren">
+        {{ $t('interface.related') }}
+        </span>
       <span
         v-for="(relatedWord, i) in word.relatert"
         :key="word.lemma_id + relatedWord"
@@ -85,7 +88,7 @@
           @click="getExampleSentences(); showingExamples = !showingExamples"
         >
           <span v-if="!loading">
-            例文
+            {{ $t('interface.examples') }}
           </span>
         </button>
         <button
@@ -96,7 +99,7 @@
           @click="getConjugations(); showingConjugations = !showingConjugations"
         >
           <span>
-            活用
+            {{ $t('interface.conjugation') }}
           </span>
         </button>
         <button
@@ -104,7 +107,10 @@
           type="button"
           @click="$emit('feedback-click')"
         >
-          <i class="fa fa-comment-o" style="font-size: 18px"></i>
+          <i
+            class="fa fa-comment-o"
+            style="font-size: 18px"
+          ></i>
         </button>
       </div>
     </div>
@@ -218,15 +224,15 @@ export default {
       let pos
       for (pos of posArray) {
         if (pos.includes('f')) {
-          return '(女)'
+          return 'f'
         }
       }
       for (pos of posArray) {
         if (pos.includes('n')) {
-          return '(中)'
+          return 'n'
         }
         if (pos.includes('m')) {
-          return '(男)'
+          return 'm'
         }
       }
       return ''

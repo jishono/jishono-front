@@ -18,6 +18,11 @@ export default {
   name: 'App',
   components: {
     Header, Footer
+  },
+  mounted () {
+    if (localStorage.getItem('locale') === null) {
+      localStorage.setItem('locale', 'ja') 
+    }
   }
 }
 </script>

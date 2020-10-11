@@ -21,7 +21,7 @@
                 autofocus
                 id="search"
                 class="input-lg form-control"
-                placeholder='ノルウェー語の検索ワード'
+                :placeholder="$t('interface.search_placeholder')"
                 type="text"
                 v-bind:class="{'form-control': true, 'error': !valid }"
               >
@@ -68,7 +68,6 @@
               {{filteredResults.length}} 件</span>
           </div>
         </div>
-
         <div
           v-for="(result,index) in filteredResults"
           :key="result.lemma_id"
@@ -78,91 +77,47 @@
             <ResultBox
               v-bind:word="result"
               @get-example-sentences="getExampleSentences(result.lemma_id, index)"
-              @get-conjugations="openModal(result.lemma_id, result.oppslag, result.boy_tabell)"
               @kanren-click="handleKanrenClick"
-              @feedback-click="openFeedbackDialog(result.lemma_id, result.oppslag, result.definisjoner)"
+              @feedback-click="openFeedbackDialog(result)"
             />
           </div>
+        </div>
+        <div
+          v-if=showRequestButton
+          class="text-center mt-3 "
+        >
+          <button
+            class="btn btn-outline-primary shadow-none"
+            @click="sendRequest"
+            :disabled="requestSent"
+          > <span v-if="requestSent">
+              依頼を送信しました！
+            </span>
+            <span v-else>
+              '{{q}}'の翻訳を依頼
+            </span>
+          </button>
         </div>
       </div>
       <div class='col-xs-2 col-lg-3'></div>
     </div>
-    <transition
-      name="fade"
-      appear
-    >
-      <div
-        class="modal-overlay"
-        v-if="showFeedbackDialog"
-        @click.self="showFeedbackDialog = false"
-      >
-        <div class="vipps-modal">
-          <div class="text-right mb-2">
-            <span
-              class="float-left"
-              style="font-weight: bold"
-            >フィードバック</span>
-            <button
-              class="btn bg-transparent p-0"
-              style="margin-top: -16px"
-              @click="showFeedbackDialog = false"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-          </div>
-          <div>単語：{{currentWord}}</div>
-          <div
-            v-for="def in this.currentDefinitions"
-            :key="def.def_id"
-          >
-            <span>{{def.prioritet}}. {{def.definisjon}}</span>
-          </div>
-          <p class="mt-3"></p>
-          <textarea
-            v-model="feedback"
-            class="form-control mt-6"
-            rows="5"
-            maxlength="500"
-            placeholder="訳や例文に誤訳、誤字などがありましたらお知らせください"
-          ></textarea>
-          <div class="row no-gutters mt-2">
-            <div class="col d-flex justify-content-between align-items-center">
-              <span class="donate-text ">
-                辞書作りに興味ありますか？
-                <a
-                  href="https://baksida.jisho.no/om"
-                  target="_blank"
-                >Baksida</a>でjisho.noを改善していきましょう！
-              </span>
-              <button
-                class="btn btn-sm shadow-none btn-outline-primary ml-2"
-                type="button"
-                @click="sendFeedback"
-                style="min-width: 50px"
-              >
-                <span>
-                  送信
-                </span>
-              </button>
-
-            </div>
-          </div>
-          <div class="row no-gutters">
-          </div>
-        </div>
-      </div>
-    </transition>
+    <FeedbackDialog
+      @close-feedback-dialog="closeFeedbackDialog"
+      v-bind:word=currentWord
+      v-bind:show=showFeedbackDialog
+    />
   </div>
 </template>
 
 <script>
 import api from '../api.js'
 import ResultBox from '../components/ResultBox'
+import FeedbackDialog from '../components/FeedbackDialog'
 
 export default {
   name: "Search",
   components: {
-    ResultBox
+    ResultBox, FeedbackDialog
   },
   data () {
     return {
@@ -170,14 +125,10 @@ export default {
       results: [],
       q: '',
       valid: true,
-      showDialog: false,
       showFeedbackDialog: false,
-      feedback: "",
-      currentWordID: null,
       currentWord: null,
-      currentDefinitions: null,
-      currentpos: null,
-
+      showRequestButton: false,
+      requestSent: false,
     }
   },
   methods: {
@@ -191,6 +142,7 @@ export default {
       api.get('/items/all')
         .then(response => {
           this.results = response.data
+          this.q = this.$route.params.query || ''
         })
     },
     validate () {
@@ -219,29 +171,22 @@ export default {
     handleKanrenClick (query) {
       this.q = query
     },
-    openFeedbackDialog (wordID, word, definitions) {
+    openFeedbackDialog (word) {
       this.showFeedbackDialog = true
-      this.currentWordID = wordID
       this.currentWord = word
-      this.currentDefinitions = definitions
-      this.feedback = ""
     },
     closeFeedbackDialog () {
       this.showFeedbackDialog = false
-      this.currentWordID = null
       this.currentWord = null
-      this.currentDefinitions = null
-      this.feedback = ""
     },
-    sendFeedback () {
-      api.post('/feedback', {
-        wordID: this.currentWordID,
-        feedback: this.feedback
-      })
-        .then(() => {
-          this.closeFeedbackDialog()
-        })
-    },
+    sendRequest () {
+      if (this.requestSent === false) {
+        api.post('/request-translation', { request: this.q })
+          .finally(() => {
+            this.requestSent = true
+          })
+      }
+    }
   },
   computed: {
     filteredResults () {
@@ -274,10 +219,11 @@ export default {
   },
   created () {
     this.getAllItems()
-    this.q = this.$route.params.query || ''
   },
   watch: {
     q: function (val) {
+      this.requestSent = false
+      this.suggestions = []
       this.valid = this.validate()
       var scrollElement
       if (this.valid && this.q.length > 0) {
@@ -290,6 +236,11 @@ export default {
         scrollElement.scrollIntoView();
       } else {
         window.scrollTo(0, 0);
+      }
+      if (this.valid && !this.filteredResults.map(result => result.oppslag).includes(this.q) && this.q != '') {
+        this.showRequestButton = true
+      } else {
+        this.showRequestButton = false
       }
     },
     $route (to) {
