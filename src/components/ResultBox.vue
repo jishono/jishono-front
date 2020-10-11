@@ -1,12 +1,12 @@
 <template>
   <div class='card my-2'>
     <div class='card-header py-1'>
-      <div class='row'>
-        <div class=' col-md-4 text-center kotoba my-auto no'>{{ word.oppslag }}</div>
+      <div class='row ja'>
+        <div class=' col-md-4 text-center result-title my-auto'>{{ word.oppslag }}</div>
         <div class='col-6 col-md-4 text-md-center text-left m-auto'>
           <div v-if="word.uttale.length > 0">
-            <span :class="$i18n.locale === 'ja' ? 'hatsuon ja' : 'no'">{{ $t('interface.pronounciation') }}:</span>
-            <span class='no'>
+            <span class="ja hatsuon">{{ $t('interface.pronounciation') }}:</span>
+            <span>
               {{word.uttale[0].transkripsjon}}
             </span>
           </div>
@@ -15,7 +15,7 @@
           class='col-6 col-md-4 text-md-center text-right m-auto'
           v-if="word.boy_tabell"
         >
-          <span :class="$i18n.locale === 'ja' ? 'hinshi ja' : 'no'">{{ $t('words.pos.' + word.boy_tabell) }}
+          <span>{{ $t('words.pos.' + word.boy_tabell) }}
             <span v-if="word.boy_tabell === 'subst'">({{ $t('words.gender.' + getGender(word.pos)) }})
             </span></span>
         </div>
@@ -36,7 +36,7 @@
         <div class='col'>
           <span
             v-html="addFurigana(def.definisjon)"
-            class='imi'
+           
           ></span><br>
         </div>
       </div>
@@ -45,7 +45,7 @@
       class='mx-3'
       v-if="word.relatert.length > 0"
     >
-      <span class="ja-kanren">
+      <span class="ja related">
         {{ $t('interface.related') }}
         </span>
       <span
@@ -53,7 +53,7 @@
         :key="word.lemma_id + relatedWord"
       >
         <span
-          style="cursor: pointer; text-decoration: underline;"
+          class="pointer underline"
           @click="$emit('kanren-click', relatedWord)"
         >{{relatedWord}}</span>
         <span v-if="i != word.relatert.length-1">,&nbsp;</span>
@@ -77,8 +77,7 @@
       </div>
       <div v-else></div>
       <div
-        class="text-right"
-        style="display: flex; align-items: center; width=100%;"
+        class="text-right button-row"
       >
         <button
           class="btn shadow-none btn-sm mb-2"
@@ -130,9 +129,9 @@
           <span>{{index + 1 + (10*page)}}.</span>
 
         </div>
-        <div class="col">
-          <div class="no-example"> {{ example.no_setning}}</div>
-          <div class="ja-example"> {{ example.ja_setning}}</div>
+        <div class="col ja example">
+          <div> {{ example.no_setning}}</div>
+          <div> {{ example.ja_setning}}</div>
         </div>
       </div>
 

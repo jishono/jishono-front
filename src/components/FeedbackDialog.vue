@@ -11,12 +11,10 @@
       <div class="vipps-modal">
         <div class="text-right mb-2">
           <span
-            class="float-left"
-            style="font-weight: bold"
+            class="float-left bold"
           > {{ $t('feedback.title') }}</span>
           <button
-            class="btn bg-transparent p-0"
-            style="margin-top: -16px"
+            class="btn bg-transparent p-0 close-button"
             @click="$emit('close-feedback-dialog')"
           >
             <i class="fa fa-times"></i>

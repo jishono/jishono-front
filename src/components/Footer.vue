@@ -8,8 +8,7 @@
         >
           <div
             @click="showVippsDialog = true"
-            style="cursor: pointer"
-            class="hover-glow"
+            class="hover-glow pointer"
           >
             <div class="d-flex justify-content-between donate-text">
               <span>{{ $t('footer.vipps') }}</span>
@@ -28,14 +27,12 @@
             </div>
           </div>
           <div
-            class="mt-3"
-            style="font-size: 14px"
+            class="mt-3 oneliner"
           >
             {{ $t('footer.oneliner') }}
           </div>
           <div
             class="my-2"
-            style="font-size: 16px"
           >
             <div class="my-1">
               <router-link

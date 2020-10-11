@@ -42,15 +42,15 @@
             <span
               v-show="!valid"
               class="text-danger"
-            >半角英数字で入力して下さい。</span>
+            >{{ $t('interface.warning') }}</span>
             <span v-if="suggestions.length > 0">
-              もしかして ->
+              {{ $t('interface.suggestion')}} ->
               <span
                 v-for="(suggestion, i) in suggestions"
                 :key=suggestion.oppslag
               >
                 <span
-                  style="cursor: pointer; text-decoration: underline;"
+                  class="pointer underline"
                   @click="searchSuggestion(suggestion.oppslag)"
                   @keyup.enter="searchSuggestion(suggestion.oppslag)"
                   tabindex="0"
@@ -101,6 +101,7 @@
       </div>
       <div class='col-xs-2 col-lg-3'></div>
     </div>
+    <About v-if="showAbout" />
     <FeedbackDialog
       @close-feedback-dialog="closeFeedbackDialog"
       v-bind:word=currentWord
@@ -113,11 +114,12 @@
 import api from '../api.js'
 import ResultBox from '../components/ResultBox'
 import FeedbackDialog from '../components/FeedbackDialog'
+import About from '../components/About'
 
 export default {
   name: "Search",
   components: {
-    ResultBox, FeedbackDialog
+    ResultBox, FeedbackDialog, About
   },
   data () {
     return {
@@ -126,6 +128,7 @@ export default {
       q: '',
       valid: true,
       showFeedbackDialog: false,
+      showAbout: false,
       currentWord: null,
       showRequestButton: false,
       requestSent: false,
@@ -149,7 +152,7 @@ export default {
       if (this.q.length === 0) {
         return true
       }
-      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.-]+$/)
+      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.-ÉéÒòÔôÀàÎîÊê]+$/)
       return matches ? true : false
     },
     getExampleSentences (lemma_id, index) {
@@ -219,6 +222,9 @@ export default {
   },
   created () {
     this.getAllItems()
+    if (this.$route.path === '/about') {
+      this.showAbout = true
+    }
   },
   watch: {
     q: function (val) {
@@ -244,8 +250,13 @@ export default {
       }
     },
     $route (to) {
+      this.showAbout = false
       if (to.path === '/search/') {
         this.q = ''
+      }
+      else if (to.path === '/about') {
+        this.q = ''
+        this.showAbout = true
       }
     }
   }
