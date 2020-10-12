@@ -28,34 +28,40 @@
     >
       <table class='table table-sm table-bordered text-right'>
         <tr
-          v-for="(conjugation,i2) in patterns[pos]"
-          :key="conjugation.pattern"
+          v-for="(conjugation,i2) in wordClasses[pos]"
+          :key="conjugation.form"
           :class="conjugation.borderTop ? 'border-top' : ''"
         >
           <th
             v-if="conjugation.rowspan"
             :rowspan=conjugation.rowspan
-            :key="conjugation.pattern + conjugation.rowspan"
+            :key="conjugation.form + conjugation.rowspan"
             class='rotate-container th-wrap pl-2'
           >
             <div v-if="conjugation.rowText">{{$t('words.conjugations.' + pos + '.' + conjugation.rowText )}}</div>
           </th>
-          <th v-if="conjugation.pattern != 'pos'" style="width: 30%;">{{$t('words.conjugations.' + pos + '.' + conjugation.pattern )}}</th>
-          <th v-else style="width: 30%;"></th>
+          <th
+            v-if="conjugation.form != 'pos'"
+            style="width: 30%;"
+          >{{$t('words.conjugations.' + pos + '.' + conjugation.form )}}</th>
+          <th
+            v-else
+            style="width: 30%;"
+          ></th>
           <template v-for="pattern in divide">
             <th
               v-if="i2 == 0"
               :key="pattern.lemma_id + pattern.paradigme"
               class="text-center"
             >
-              {{ pattern[conjugation.pattern]}}
+              {{ pattern[conjugation.form]}}
             </th>
             <td
               v-else
               :key="pattern.lemma_id + pattern.paradigme"
             > <span v-if="conjugation.prefix">{{ conjugation.prefix }}</span>
               <span v-if="conjugation.genderPrefix">{{ getPrefix(pattern.pos) }}</span>
-              {{ pattern[conjugation.pattern]}}
+              {{ pattern[conjugation.form]}}
             </td>
           </template>
         </tr>
@@ -74,55 +80,55 @@ export default {
     return {
       conjugations: [],
       hasConjugation: ['adj', 'adv', 'det', 'pron', 'subst', 'verb'],
-      patterns: {
+      wordClasses: {
         adj: [
-          { text: '', pattern: 'pos', rowspan: 1 },
-          { text: '男・女性形', pattern: 'm_entall', rowspan: 3, rowText:'entall' },
-          { text: '中性形', pattern: 'n_entall' },
-          { text: '既知形', pattern: 'bestemt_entall' },
-          { text: '複数形', pattern: 'flertall', rowspan: 1, borderTop: true },
-          { text: '比較級', pattern: 'komparativ', rowspan: 3, borderTop: true },
-          { text: '最上級', pattern: 'superlativ' },
-          { text: '最上級既知形	', pattern: 'superlativ_bestemt' },
+          { form: 'pos', rowspan: 1 },
+          { form: 'm_entall', rowspan: 3, rowText: 'entall' },
+          { form: 'n_entall' },
+          { form: 'bestemt_entall' },
+          { form: 'flertall', rowspan: 1, borderTop: true },
+          { form: 'komparativ', rowspan: 3, borderTop: true },
+          { form: 'superlativ' },
+          { form: 'superlativ_bestemt' },
         ],
         adv: [
-          { text: '', pattern: 'pos' },
-          { text: '普通形', pattern: 'positiv' },
-          { text: '比較級', pattern: 'komparativ' },
-          { text: '未知複数形', pattern: 'superlativ' },
+          { form: 'pos' },
+          { form: 'positiv' },
+          { form: 'komparativ' },
+          { form: 'superlativ' },
         ],
         det: [
-          { text: '', pattern: 'pos', rowspan: 1 },
-          { text: '男性単数形', pattern: 'm_entall', rowspan: 3, rowText: 'entall' },
-          { text: '女性単数形', pattern: 'f_entall' },
-          { text: '中性単数形', pattern: 'n_entall' },
-          { text: '複数形', pattern: 'flertall', rowspan: 2, borderTop: true },
-          { text: '既知形', pattern: 'bestemt_entall' }
+          { form: 'pos', rowspan: 1 },
+          { form: 'm_entall', rowspan: 3, rowText: 'entall' },
+          { form: 'f_entall' },
+          { form: 'n_entall' },
+          { form: 'flertall', rowspan: 2, borderTop: true },
+          { form: 'bestemt_entall' }
         ],
         pron: [
-          { text: '', pattern: 'pos' },
-          { text: '主格', pattern: 'subjektsform' },
-          { text: '目的格', pattern: 'objektsform' },
+          { form: 'pos' },
+          { form: 'subjektsform' },
+          { form: 'objektsform' },
         ],
         subst: [
-          { text: '', pattern: 'pos' },
-          { text: '未知単数形', pattern: 'ubestemt_entall', genderPrefix: true },
-          { text: '既知単数形', pattern: 'bestemt_entall' },
-          { text: '未知複数形', pattern: 'ubestemt_flertall' },
-          { text: '既知複数形', pattern: 'bestemt_flertall' },
+          { form: 'pos' },
+          { form: 'ubestemt_entall', genderPrefix: true },
+          { form: 'bestemt_entall' },
+          { form: 'ubestemt_flertall' },
+          { form: 'bestemt_flertall' },
         ],
         verb: [
-          { text: '', pattern: 'pos', rowspan: 6 },
-          { text: '不定形', pattern: 'infinitiv', prefix: 'å ' },
-          { text: '現在形', pattern: 'presens' },
-          { text: '過去形', pattern: 'preteritum' },
-          { text: '現在完了形', pattern: 'presens_perfektum', prefix: 'har ' },
-          { text: '命令形', pattern: 'imperativ' },
-          { text: '男・女性形', pattern: 'perf_part_mf', rowspan: 4, rowText: 'perfektum', borderTop: true },
-          { text: '中性形', pattern: 'perf_part_n' },
-          { text: '既知形', pattern: 'perf_part_bestemt' },
-          { text: '複数形', pattern: 'perf_part_flertall' },
-          { text: '現在分詞形', pattern: 'presens_partisipp', rowspan: 1, borderTop: true },
+          { form: 'pos', rowspan: 6 },
+          { form: 'infinitiv', prefix: 'å ' },
+          { form: 'presens' },
+          { form: 'preteritum' },
+          { form: 'presens_perfektum', prefix: 'har ' },
+          { form: 'imperativ' },
+          { form: 'perf_part_mf', rowspan: 4, rowText: 'perfektum', borderTop: true },
+          { form: 'perf_part_n' },
+          { form: 'perf_part_bestemt' },
+          { form: 'perf_part_flertall' },
+          { form: 'presens_partisipp', rowspan: 1, borderTop: true },
         ]
       },
     }

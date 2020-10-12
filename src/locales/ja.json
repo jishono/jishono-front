@@ -25,7 +25,9 @@
         "related": "関連語：",
         "suggestion": "もしかして",
         "request_button": "の翻訳を依頼",
-        "request_sent": "翻訳依頼を送信しました！"
+        "request_sent": "翻訳依頼を送信しました！",
+        "show_more": "もっと見る",
+        "no_examples": "例文の登録がありません"
     },
     "words": {
         "word": "単語:",
@@ -43,9 +45,10 @@
             "verb": "動詞"
         },
         "gender": {
-            "m": "男",
-            "f": "女",
-            "n": "中"
+            "m": "(男)",
+            "f": "(女)",
+            "n": "(中)",
+            "subst_uboy": ""
         },
         "conjugations": {
             "normal": "普通形",
@@ -115,6 +118,10 @@
             "text": "翻訳作業をしてくれているボランティアのほかに下記のメンバーが、編集責任がありコーディングとサーバー管理を行っているコアチームです。",
             "list": "<ul> <li> Per Gunnar Paulsen (主要責任者、編集者兼Baksida管理者、コーディング担当) </li> <li>Petter Mæhlum (編集者兼Baksida管理者)</li> <li> Patrick Auri (コーディング担当、デザイン担当) </li> <li> Stian Frøystein (サーバー担当) </li> <li> Takaaki Yoshikawa (コーディング担当、サイトの日本語訳担当) </li> </ul>",
             "contact": "プロジェクトへのご質問は admin (アットマーク) jisho.no までお寄せください。"
+        },
+        "p5": {
+            "title": "例文について",
+            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されいてる<a href='https://tatoeba.org' target='_blank'>Tatoeba</a>プロジェクトから取り入れています。"
         }
     }
 }

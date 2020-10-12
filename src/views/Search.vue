@@ -16,7 +16,7 @@
             <div class='input-group '>
               <input
                 :value="q"
-                v-on:input="q = $event.target.value"
+                v-on:input="q = $event.target.value.toLowerCase()"
                 ref="search"
                 autofocus
                 id="search"
@@ -29,7 +29,7 @@
                 v-if="this.q != ''"
                 class="btn bg-transparent"
                 style="margin-left: -40px; z-index: 100; "
-                @click="q = ''"
+                @click="handleClearClick()"
                 tabindex="1"
               >
                 <i class="fa fa-times"></i>
@@ -60,7 +60,7 @@
               </span>
             </span>
           </div>
-          <div class="col-3 text-right">
+          <div class="col-3 pl-0 text-right">
             <span
               v-if="q.length > 0"
               class="text-right"
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div
-          v-for="(result,index) in filteredResults"
+          v-for="(result,index) in slicedResults"
           :key="result.lemma_id"
           class='row my-2'
         >
@@ -83,6 +83,13 @@
           </div>
         </div>
         <div
+          class="text-center "
+          v-if="filteredResults.length > sliceEnd"
+          @click="sliceEnd = sliceEnd + 30"
+        >
+          <span class="btn btn-outline-primary shadow-none"> {{ $t('interface.show_more')}}</span>
+        </div>
+        <div
           v-if=showRequestButton
           class="text-center mt-3 "
         >
@@ -91,10 +98,10 @@
             @click="sendRequest"
             :disabled="requestSent"
           > <span v-if="requestSent">
-              依頼を送信しました！
+              {{ $t('interface.request_sent') }}
             </span>
             <span v-else>
-              '{{q}}'の翻訳を依頼
+              '{{q}}'{{ $t('interface.request_button') }}
             </span>
           </button>
         </div>
@@ -132,6 +139,7 @@ export default {
       currentWord: null,
       showRequestButton: false,
       requestSent: false,
+      sliceEnd: 30,
     }
   },
   methods: {
@@ -152,7 +160,7 @@ export default {
       if (this.q.length === 0) {
         return true
       }
-      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.-ÉéÒòÔôÀàÎîÊê]+$/)
+      const matches = this.q.match(/^[0-9A-ZÆÅØa-zæåø\s.\-ÉéÒòÔôÀàÎîÊê]+$/)
       return matches ? true : false
     },
     getExampleSentences (lemma_id, index) {
@@ -174,6 +182,9 @@ export default {
     handleKanrenClick (query) {
       this.q = query
     },
+    handleClearClick () {
+      this.$router.push('/search/')
+    },
     openFeedbackDialog (word) {
       this.showFeedbackDialog = true
       this.currentWord = word
@@ -189,7 +200,7 @@ export default {
             this.requestSent = true
           })
       }
-    }
+    },
   },
   computed: {
     filteredResults () {
@@ -215,10 +226,12 @@ export default {
             }
 
           })
-          .slice(0, 30)
       }
       return filtered
     },
+    slicedResults () {
+      return this.filteredResults.slice(0, this.sliceEnd)
+    }
   },
   created () {
     this.getAllItems()
@@ -229,19 +242,19 @@ export default {
   watch: {
     q: function (val) {
       this.requestSent = false
+      this.sliceEnd = 30
       this.suggestions = []
       this.valid = this.validate()
-      var scrollElement
       if (this.valid && this.q.length > 0) {
-        this.q = val.toLowerCase()
         this.$router.push('/search/' + val, () => { })
         this.getSuggestionList()
       }
+      var scrollElement
       if (val != '' && window.screen.width < 600) {
-        scrollElement = document.getElementById("inputfield");
-        scrollElement.scrollIntoView();
+        scrollElement = document.getElementById("inputfield")
+        scrollElement.scrollIntoView()
       } else {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
       }
       if (this.valid && !this.filteredResults.map(result => result.oppslag).includes(this.q) && this.q != '') {
         this.showRequestButton = true

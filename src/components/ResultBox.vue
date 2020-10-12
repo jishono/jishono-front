@@ -1,12 +1,15 @@
 <template>
   <div class='card my-2'>
-    <div class='card-header py-1'>
+    <div
+      class='card-header py-1'
+      :id="'result' + word.lemma_id"
+    >
       <div class='row ja'>
         <div class=' col-md-4 text-center result-title my-auto'>{{ word.oppslag }}</div>
         <div class='col-6 col-md-4 text-md-center text-left m-auto'>
           <div v-if="word.uttale.length > 0">
-            <span class="ja hatsuon">{{ $t('interface.pronounciation') }}:</span>
-            <span>
+            <span class="ja">{{ $t('interface.pronounciation') }}:</span>
+            <span class="pronounctiation">
               {{word.uttale[0].transkripsjon}}
             </span>
           </div>
@@ -15,15 +18,15 @@
           class='col-6 col-md-4 text-md-center text-right m-auto'
           v-if="word.boy_tabell"
         >
-          <span>{{ $t('words.pos.' + word.boy_tabell) }}
-            <span v-if="word.boy_tabell === 'subst'">({{ $t('words.gender.' + getGender(word.pos)) }})
+          <span v-if="partsOfSpeech.includes(word.boy_tabell)">{{ $t('words.pos.' + word.boy_tabell) }}
+            <span v-if="word.boy_tabell === 'subst'">{{ $t('words.gender.' + getGender(word.pos)) }}
             </span></span>
         </div>
       </div>
     </div>
     <div class='my-3 mx-3 ja'>
       <div
-        class='row no-gutters'
+        class='row no-gutters imi'
         v-for="def in word.definisjoner"
         :key="def.def_id + def.definisjon"
       >
@@ -34,10 +37,7 @@
           <span class='imi-count '>{{def.prioritet}}.</span>
         </div>
         <div class='col'>
-          <span
-            v-html="addFurigana(def.definisjon)"
-           
-          ></span><br>
+          <span v-html="addFurigana(def.definisjon)"></span><br>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
     >
       <span class="ja related">
         {{ $t('interface.related') }}
-        </span>
+      </span>
       <span
         v-for="(relatedWord, i) in word.relatert"
         :key="word.lemma_id + relatedWord"
@@ -66,25 +66,23 @@
         style="display: flex; align-items: center; "
       >
         <i
-          class="fa fa-chevron-left fa-sm"
+          class="fa fa-chevron-left fa-sm pt-0"
           @click="previousPage"
         ></i>
-        <span class="mx-1">{{page + 1}} / {{totalPages}}</span>
+        <span class="mx-1 pages">{{page + 1}} / {{totalPages}}</span>
         <i
-          class="fa fa-chevron-right"
+          class="fa fa-chevron-right pt-0"
           @click="nextPage"
         ></i>
       </div>
       <div v-else></div>
-      <div
-        class="text-right button-row"
-      >
+      <div class="text-right button-row">
         <button
           class="btn shadow-none btn-sm mb-2"
           :class="showingExamples ? 'btn-primary' : 'btn-outline-primary'"
           type="button"
           data-toggle="collapse"
-          @click="getExampleSentences(); showingExamples = !showingExamples"
+          @click="getExampleSentences"
         >
           <span v-if="!loading">
             {{ $t('interface.examples') }}
@@ -95,7 +93,7 @@
           :class="showingConjugations ? 'btn-primary' : 'btn-outline-primary'"
           type="button"
           data-toggle="collapse-conjugations"
-          @click="getConjugations(); showingConjugations = !showingConjugations"
+          @click="getConjugations"
         >
           <span>
             {{ $t('interface.conjugation') }}
@@ -124,21 +122,21 @@
       >
         <div
           class='col-fluid text-right mr-2'
-          style='width: 25px'
+          style='width: 32px'
         >
           <span>{{index + 1 + (10*page)}}.</span>
 
         </div>
         <div class="col ja example">
           <div> {{ example.no_setning}}</div>
-          <div> {{ example.ja_setning}}</div>
+          <div class="ja"> {{ example.ja_setning}}</div>
         </div>
       </div>
 
       <div
         v-if="word.example_sentences && word.example_sentences.length === 0"
         class="ja ml-2"
-      >例文の登録がありません。</div>
+      >{{ $t('interface.no_examples') }}</div>
     </div>
     <div
       class='collapse text-left mb-2'
@@ -171,19 +169,19 @@ export default {
       showingExamples: false,
       showingConjugations: false,
       relatedWords: [],
-      partsOfSpeech: {
-        adj: "形容詞",
-        adv: "副詞",
-        det: "限定詞",
-        interjeksjon: "感動詞",
-        konjunksjon: "接続詞",
-        preposisjon: "前置詞",
-        prefiks: "接頭辞",
-        pron: "代名詞",
-        subjunksjon: "関係詞",
-        subst: "名詞",
-        verb: "動詞",
-      },
+      partsOfSpeech: [
+        'adj',
+        'adv',
+        'det',
+        'interjeksjon',
+        'konjunksjon',
+        'preposisjon',
+        'prefiks',
+        'pron',
+        'subjunksjon',
+        'subst',
+        'verb'
+      ],
     }
   },
   props: {
@@ -209,6 +207,10 @@ export default {
     },
   },
   methods: {
+    scrollToCardHeader () {
+      let cardHeader = document.getElementById('result' + this.word.lemma_id)
+      cardHeader.scrollIntoView({behavior: 'smooth'})
+    },
     nextPage () {
       if (this.page < this.totalPages - 1) {
         this.page++
@@ -234,17 +236,22 @@ export default {
           return 'm'
         }
       }
-      return ''
+      return 'subst_uboy'
     },
     getExampleSentences () {
+      this.showingExamples = !this.showingExamples
+      this.scrollToCardHeader()
       const str = '#collapse' + this.word.lemma_id
       window.$(str).collapse('toggle')
       this.$emit('get-example-sentences');
     },
     getConjugations () {
+      this.showingConjugations = !this.showingConjugations
+      this.scrollToCardHeader()
       const str = '#collapse-conjugations' + this.word.lemma_id
       window.$(str).collapse('toggle')
     },
+
     addRuby (str) {
       const kanji = str.match(/.*?(?=\[)/)
       let furigana = str.match(/(?=\[).*(\])/)

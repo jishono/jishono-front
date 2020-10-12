@@ -1,9 +1,7 @@
 <template>
   <div class="container-fluid about-box mt-2">
     <div class='row'>
-      <div
-        class='col mx-auto about-text'
-      >
+      <div class='col mx-auto about-text'>
         <p class="bold">
           {{ $t('about.p1.title')}}
         </p>
@@ -31,6 +29,11 @@
         </p>
         <p>
           {{ $t('about.p4.contact')}}
+        </p>
+        <p class="bold">
+          {{ $t('about.p5.title')}}
+        </p>
+        <p v-html="$t('about.p5.text')">
         </p>
       </div>
     </div>

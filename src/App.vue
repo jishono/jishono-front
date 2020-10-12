@@ -21,8 +21,11 @@ export default {
   },
   mounted () {
     if (localStorage.getItem('locale') === null) {
-      localStorage.setItem('locale', 'ja') 
+      localStorage.setItem('locale', 'ja')
     }
+    window.$(document).bind('focus', function (e) {
+      e.preventDefault();
+    });
   }
 }
 </script>

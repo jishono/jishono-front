@@ -26,14 +26,10 @@
               </div>
             </div>
           </div>
-          <div
-            class="mt-3 oneliner"
-          >
+          <div class="mt-3 oneliner">
             {{ $t('footer.oneliner') }}
           </div>
-          <div
-            class="my-2"
-          >
+          <div class="my-2">
             <div class="my-1">
               <router-link
                 class="badge badge-pill pill-button mx-1"
@@ -71,9 +67,7 @@
         </div>
       </div>
     </div>
-    <div style="
-              height:
-              800px">
+    <div style="height: 800px">
     </div>
     <VippsDialog
       v-bind:show="showVippsDialog"

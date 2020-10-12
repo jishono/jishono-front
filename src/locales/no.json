@@ -24,8 +24,10 @@
         "conjugation": "bøyning",
         "related": "Relaterte ord:",
         "suggestion": "Mener du",
-        "request_button": " -> Be om oversettelse",
-        "request_sent": "Ønske om oversettelse sendt!"
+        "request_button": " <- be om oversettelse",
+        "request_sent": "Ønske om oversettelse sendt!",
+        "show_more": "Vis flere treff",
+        "no_examples": "Ingen eksempelsetninger funnet."
     },
     "words": {
         "word": "Oppslag:",
@@ -43,9 +45,10 @@
             "verb": "verb"
         },
         "gender": {
-            "m": "m",
-            "f": "f",
-            "n": "n"
+            "m": "(m)",
+            "f": "(f)",
+            "n": "(n)",
+            "subst_uboy": ""
         },
         "conjugations": {
             "normal": "enkeltform",
@@ -115,6 +118,10 @@
             "text": "I tillegg til alle de frivillige oversetterne er vi et kjerneteam av følgende personer som har overordnet redaksjonelt ansvar og som jobber med kode og server.",
             "list": "<ul> <li> Per Gunnar Paulsen (hovedansvarlig, redaktør/admin på baksida, kode) </li> <li>Petter Mæhlum (redaktør/admin på baksida)</li> <li> Patrick Auri (kode, design) </li> <li> Stian Frøystein (server) </li> <li> Takaaki Yoshikawa (kode, japansk innhold) </li> </ul>",
             "contact": "Alle spørsmål om prosjektet kan rettes til admin (alfakrøll) jisho.no"
+        },
+        "p5": {
+            "title": "Om eksempelsetningene",
+            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR."
         }
     }
 }

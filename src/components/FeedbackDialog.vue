@@ -20,12 +20,12 @@
             <i class="fa fa-times"></i>
           </button>
         </div>
-        <div> {{ $t('words.word') }} {{word.oppslag}}</div>
+        <div>{{word.oppslag}}</div>
         <div
           v-for="def in this.word.definisjoner"
           :key="def.def_id"
         >
-          <span>{{def.prioritet}}. {{def.definisjon}}</span>
+          <span class="ja">{{def.prioritet}}. {{def.definisjon}}</span>
         </div>
         <p class="mt-3"></p>
         <textarea
