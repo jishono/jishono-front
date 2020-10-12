@@ -1,24 +1,6 @@
-# front
 
-## Project setup
-```
-npm install
-```
+# [www.jisho.no](https://www.jisho.no)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[Project board](https://github.com/orgs/jishono/projects/1) | [Changelog](https://github.com/jishono/jishono-felles/blob/master/CHANGELOG.md)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Norwegian-Japanese online dictionary [jisho.no](https://jisho.no)  
