@@ -16,7 +16,7 @@
             <div class='input-group '>
               <input
                 :value="q"
-                v-on:input="q = $event.target.value.toLowerCase()"
+                v-on:input="q = $event.target.value.toLowerCase().trim()"
                 ref="search"
                 autofocus
                 id="search"
