@@ -90,6 +90,18 @@
           <span class="btn btn-outline-primary shadow-none"> {{ $t('interface.show_more')}}</span>
         </div>
         <div
+          v-if=" q != '' && filteredResults.length === 0 && valid"
+          class="text-center mt-2"
+        >
+          <span v-if="$i18n.locale == 'no'">Søk på
+            <span style="font-weight: bold">'{{q}}'</span>
+            ga ingen treff.</span>
+          <span v-if="$i18n.locale == 'ja'">
+            <span style="font-weight: bold">'{{q}}'</span>
+            に一致する検索結果がありませんでした。</span>
+
+        </div>
+        <div
           v-if=showRequestButton
           class="text-center mt-3 "
         >
@@ -101,7 +113,7 @@
               {{ $t('interface.request_sent') }}
             </span>
             <span v-else>
-              '{{q}}'{{ $t('interface.request_button') }}
+              {{ $t('interface.request_button') }}
             </span>
           </button>
         </div>

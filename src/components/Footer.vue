@@ -50,15 +50,15 @@
           <div class="mt-3">
             <img
               class="flag-icon mx-1"
-              height="25px"
-              width="25px"
+              height="30px"
+              width="30px"
               src="@/assets/japan-icon-border.png"
               @click="setLocale('ja')"
             >
             <img
               class="flag-icon mx-1"
-              height="25px"
-              width="25px"
+              height="30px"
+              width="30px"
               bor
               src="@/assets/norway-icon.png"
               @click="setLocale('no')"
