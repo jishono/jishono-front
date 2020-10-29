@@ -27,7 +27,8 @@
         "request_button": "翻訳を依頼",
         "request_sent": "翻訳依頼を送信しました！",
         "show_more": "もっと見る",
-        "no_examples": "例文の登録がありません"
+        "no_examples": "例文の登録がありません",
+        "wikipedia": "Wikipediaによる翻訳"
     },
     "words": {
         "word": "単語:",
@@ -120,8 +121,8 @@
             "contact": "プロジェクトへのご質問は admin (アットマーク) jisho.no までお寄せください。"
         },
         "p5": {
-            "title": "例文について",
-            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されいてる<a href='https://tatoeba.org' target='_blank'>Tatoeba</a>プロジェクトから取り入れています。"
+            "title": "例文とWikipediaによる翻訳について",
+            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されいてる<a href='https://tatoeba.org' target='_blank'>Tatoeba</a>プロジェクトから取り入れています。Wikipediaによる翻訳はCC BY-SA 3.0ライセンスで公開されています"
         }
     }
 }

@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class='my-3 mx-3 ja'>
+    <div class='my-2 mx-3 ja'>
       <div
         class='row no-gutters imi'
         v-for="def in word.definisjoner"
@@ -40,6 +40,16 @@
           <span v-html="addFurigana(def.definisjon)"></span><br>
         </div>
       </div>
+    </div>
+    <div
+      class='mx-3 mb-1'
+      v-if="word.definisjoner[0].wiki === 1"
+    >
+      <img
+        src='@/assets/wikipedia_logo_20px.png'
+      >
+      <span class="ml-1" style=" font-size: 14px">
+        {{ $t('interface.wikipedia') }}</span>
     </div>
     <div
       class='mx-3'
@@ -209,7 +219,7 @@ export default {
   methods: {
     scrollToCardHeader () {
       let cardHeader = document.getElementById('result' + this.word.lemma_id)
-      cardHeader.scrollIntoView({behavior: 'smooth'})
+      cardHeader.scrollIntoView({ behavior: 'smooth' })
     },
     nextPage () {
       if (this.page < this.totalPages - 1) {

@@ -27,7 +27,8 @@
         "request_button": "Be om oversettelse",
         "request_sent": "Ønske om oversettelse sendt!",
         "show_more": "Vis flere treff",
-        "no_examples": "Ingen eksempelsetninger funnet."
+        "no_examples": "Ingen eksempelsetninger funnet.",
+        "wikipedia": "Oversettelse fra Wikipedia"
     },
     "words": {
         "word": "Oppslag:",
@@ -120,8 +121,8 @@
             "contact": "Alle spørsmål om prosjektet kan rettes til admin (alfakrøll) jisho.no"
         },
         "p5": {
-            "title": "Om eksempelsetningene",
-            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR."
+            "title": "Om eksempelsetningene og Wikipedia",
+            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeligjort under lisensen CC BY-SA 3.0"
         }
     }
 }
