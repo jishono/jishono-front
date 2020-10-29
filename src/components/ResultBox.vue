@@ -18,9 +18,8 @@
           class='col-6 col-md-4 text-md-center text-right m-auto'
           v-if="word.boy_tabell"
         >
-          <span v-if="partsOfSpeech.includes(word.boy_tabell)">{{ $t('words.pos.' + word.boy_tabell) }}
-            <span v-if="word.boy_tabell === 'subst'">{{ $t('words.gender.' + getGender(word.pos)) }}
-            </span></span>
+          <span v-if="partsOfSpeech.includes(word.boy_tabell)">{{ $t('words.pos.' + word.boy_tabell) }}</span><span v-if="word.boy_tabell === 'subst'">{{ $t('words.gender.' + getGender(word.pos)) }}
+          </span>
         </div>
       </div>
     </div>
@@ -45,10 +44,11 @@
       class='mx-3 mb-1'
       v-if="word.definisjoner[0].wiki === 1"
     >
-      <img
-        src='@/assets/wikipedia_logo_20px.png'
+      <img src='@/assets/wikipedia_logo_20px.png'>
+      <span
+        class="ml-1"
+        style=" font-size: 14px"
       >
-      <span class="ml-1" style=" font-size: 14px">
         {{ $t('interface.wikipedia') }}</span>
     </div>
     <div

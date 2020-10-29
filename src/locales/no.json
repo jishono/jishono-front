@@ -46,9 +46,9 @@
             "verb": "verb"
         },
         "gender": {
-            "m": "(m)",
-            "f": "(f)",
-            "n": "(n)",
+            "m": " (m)",
+            "f": " (f)",
+            "n": " (n)",
             "subst_uboy": ""
         },
         "conjugations": {
