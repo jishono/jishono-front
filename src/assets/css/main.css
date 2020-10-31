@@ -78,7 +78,12 @@ input::placeholder {
 }
 
 .bold {
-	font-weight: 700
+	font-weight: 700;
+}
+
+.wiki-link {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.6);
 }
 
 /* Navigation */

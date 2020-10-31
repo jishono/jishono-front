@@ -90,7 +90,7 @@
           <span class="btn btn-outline-primary shadow-none"> {{ $t('interface.show_more')}}</span>
         </div>
         <div
-          v-if=" q != '' && filteredResults.length === 0 && valid"
+          v-if=" q != '' && !exactMatch"
           class="text-center mt-2"
         >
           <span v-if="$i18n.locale == 'no'">Søk på
@@ -243,6 +243,12 @@ export default {
     },
     slicedResults () {
       return this.filteredResults.slice(0, this.sliceEnd)
+    },
+    exactMatch () {
+      if (this.filteredResults.length === 0) {
+        return false
+      }
+      return this.valid && this.filteredResults[0].oppslag.toLowerCase() === this.q
     }
   },
   created () {

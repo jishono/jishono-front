@@ -44,12 +44,13 @@
       class='mx-3 mb-1'
       v-if="word.definisjoner[0].wiki === 1"
     >
+    <a :href="'https://no.wikipedia.org/wiki/' + word.oppslag" target="_blank">
       <img src='@/assets/wikipedia_logo_20px.png'>
       <span
-        class="ml-1"
-        style=" font-size: 14px"
+        class="ml-1 wiki-link"
       >
         {{ $t('interface.wikipedia') }}</span>
+    </a>
     </div>
     <div
       class='mx-3'
