@@ -266,6 +266,8 @@ export default {
       if (this.valid && this.q.length > 0) {
         this.$router.push('/search/' + val, () => { })
         this.getSuggestionList()
+      } else if (this.q === ''){
+        this.$router.push('/search/', () => { })
       }
       var scrollElement
       if (val != '' && window.screen.width < 600) {
