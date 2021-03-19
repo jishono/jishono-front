@@ -104,8 +104,8 @@ export default {
   mounted () {
     api.get('https://spreadsheets.google.com/feeds/list/1932p6AND-EnBwZ9ST5lfDn9nTD42MaVwsTVPzugplrQ/1/public/values?alt=json')
       .then(response => {
-        this.collected = response.data.feed.entry[0].gsx$innsamlet.$t
-        this.goal = response.data.feed.entry[0].gsx$mål.$t
+        this.collected = response.data.feed.entry[1].gsx$innsamlet.$t
+        this.goal = response.data.feed.entry[1].gsx$mål.$t
       })
   }
 
