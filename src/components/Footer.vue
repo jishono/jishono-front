@@ -102,10 +102,11 @@ export default {
     }
   },
   mounted () {
-    api.get('https://spreadsheets.google.com/feeds/list/1932p6AND-EnBwZ9ST5lfDn9nTD42MaVwsTVPzugplrQ/1/public/values?alt=json')
+    api.get('https://sheets.googleapis.com/v4/spreadsheets/1932p6AND-EnBwZ9ST5lfDn9nTD42MaVwsTVPzugplrQ/values/Sheet1/?key=AIzaSyD4UXqPCubwIZRCgV-0QVWXTiioPU6xpj4')
       .then(response => {
-        this.collected = response.data.feed.entry[1].gsx$innsamlet.$t
-        this.goal = response.data.feed.entry[1].gsx$mål.$t
+        console.log(response)
+        this.collected = response.data.values[3][1]
+        this.goal = response.data.values[3][2]
       })
   }
 
