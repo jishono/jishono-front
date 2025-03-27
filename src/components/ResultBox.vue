@@ -166,8 +166,7 @@
 </template>
 
 <script setup>
-
-import wikipediaLogo from './assets/wikipedia_logo_20px.png';
+import wikipediaLogo from '../assets/wikipedia_logo_20px.png';
 </script>
 
 <script>
