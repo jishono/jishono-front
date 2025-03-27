@@ -130,16 +130,20 @@
 </template>
 
 <script>
-import api from '../api.js'
-import ResultBox from '../components/ResultBox'
-import FeedbackDialog from '../components/FeedbackDialog'
-import About from '../components/About'
+import { defineComponent, nextTick } from 'vue';
 
-export default {
+import api from '../api.js';
+import About from '../components/About.vue';
+import FeedbackDialog from '../components/FeedbackDialog.vue';
+import ResultBox from '../components/ResultBox.vue';
+
+export default defineComponent({
   name: "Search",
+
   components: {
     ResultBox, FeedbackDialog, About
   },
+
   data () {
     return {
       suggestions: [],
@@ -154,6 +158,7 @@ export default {
       sliceEnd: 30,
     }
   },
+
   methods: {
     getSuggestionList () {
       api.get('/suggestion_list?q=' + this.q)
@@ -179,13 +184,13 @@ export default {
       if (!this.filteredResults[index].example_sentences) {
         api.get('/example_sentences/' + lemma_id)
           .then(response => {
-            this.$set(this.filteredResults[index], 'example_sentences', response.data)
+            this.filteredResults[index].example_sentences = response.data
           })
       }
     },
     searchSuggestion (suggestion) {
       this.q = suggestion
-      this.$nextTick(() => {
+      nextTick(() => {
         this.$refs.search.focus({
           preventScroll: true
         })
@@ -214,6 +219,7 @@ export default {
       }
     },
   },
+
   computed: {
     filteredResults () {
       let filtered = []
@@ -251,12 +257,14 @@ export default {
       return this.valid && this.filteredResults[0].oppslag.toLowerCase() === this.q
     }
   },
+
   created () {
     this.getAllItems()
     if (this.$route.path === '/about') {
       this.showAbout = true
     }
   },
+
   watch: {
     q: function (val) {
       this.requestSent = false
@@ -292,6 +300,6 @@ export default {
         this.showAbout = true
       }
     }
-  }
-}
+  },
+});
 </script>

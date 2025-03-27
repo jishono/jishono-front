@@ -13,7 +13,7 @@
     "feedback": {
         "title": "Tilbakemelding",
         "placeholder": "Si gjerne ifra her hvis du oppdager feil i oversettelser eller eksempler, eller har andre kommentarer til oppslaget.",
-        "baksida": "Interessert i å bidra til ordboka? Ta en titt på <a href='https://baksida.jisho.no' target='_blank'>Baksida</a>!",
+        "baksida": "Interessert i å bidra til ordboka? Ta en titt på <a href='https://baksida.jisho.no' target='_blank' rel='noopener noreferrer'>Baksida</a>!",
         "send": "Send"
     },
     "interface": {
@@ -108,7 +108,7 @@
         },
         "p2": {
             "title": "Kan jeg også bidra?",
-            "text": "Alle som vil kan bidra! Ta en titt på <a href='https://baksida.jisho.no' target='_blank'>Baksida</a> hvis du er interessert i å hjelpe med oversettelser og kvalitetssikring av disse. Bruk også gjerne kommentar-knappen på hvert oppslag hvis du oppdager feil eller har kommentarer til oversettelsene."
+            "text": "Alle som vil kan bidra! Ta en titt på <a href='https://baksida.jisho.no' target='_blank' rel='noopener noreferrer'>Baksida</a> hvis du er interessert i å hjelpe med oversettelser og kvalitetssikring av disse. Bruk også gjerne kommentar-knappen på hvert oppslag hvis du oppdager feil eller har kommentarer til oversettelsene."
         },
         "p3": {
             "title": "Tar dere imot donasjoner?",
@@ -122,7 +122,7 @@
         },
         "p5": {
             "title": "Om eksempelsetningene og Wikipedia",
-            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeligjort under lisensen CC BY-SA 3.0"
+            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeligjort under lisensen CC BY-SA 3.0"
         }
     }
 }

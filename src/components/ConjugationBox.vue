@@ -72,10 +72,14 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import api from '../api.js'
 
-export default {
+export default defineComponent({
+  emits: ['close'],
   name: 'ConjugationBox',
+
   data () {
     return {
       conjugations: [],
@@ -133,6 +137,7 @@ export default {
       },
     }
   },
+
   props: {
     show: Boolean,
     wordID: Number,
@@ -140,6 +145,7 @@ export default {
     word: String,
 
   },
+
   methods: {
     close () {
       this.$emit("close")
@@ -159,6 +165,7 @@ export default {
       }
     }
   },
+
   computed: {
     dividedResults () {
       let divider
@@ -175,6 +182,7 @@ export default {
       return splitArrays
     }
   },
+
   watch: {
     show: function (val) {
       if (val) {
@@ -182,5 +190,5 @@ export default {
       }
     }
   },
-};
-    </script>
+});
+</script>

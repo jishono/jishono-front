@@ -13,7 +13,7 @@
     "feedback": {
         "title": "フィードバック",
         "placeholder": "訳や例文に誤訳、誤字などがありましたらお知らせください",
-        "baksida": "辞書作りに興味ありますか？ <a href='https://baksida.jisho.no' target='_blank'>Baksida</a>でjisho.noを改善していきましょう！",
+        "baksida": "辞書作りに興味ありますか？ <a href='https://baksida.jisho.no' target='_blank' rel='noopener noreferrer'>Baksida</a>でjisho.noを改善していきましょう！",
         "send": "送信"
     },
     "interface": {
@@ -108,7 +108,7 @@
         },
         "p2": {
             "title": "私も貢献できますか？",
-            "text": "どなたでも貢献いただけます！ 翻訳や品質向上をサポートしたい方は、<a href='https://baksida.jisho.no' target='_blank'>Baksida</a>をご確認ください。また誤りを見つけた場合や翻訳に対してコメントする際は、コメントボタンをお使いください。"
+            "text": "どなたでも貢献いただけます！ 翻訳や品質向上をサポートしたい方は、<a href='https://baksida.jisho.no' target='_blank' rel='noopener noreferrer'>Baksida</a>をご確認ください。また誤りを見つけた場合や翻訳に対してコメントする際は、コメントボタンをお使いください。"
         },
         "p3": {
             "title": "寄付は受け付けていますか？",
@@ -122,7 +122,7 @@
         },
         "p5": {
             "title": "例文とWikipediaによる翻訳について",
-            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されいてる<a href='https://tatoeba.org' target='_blank'>Tatoeba</a>プロジェクトから取り入れています。Wikipediaによる翻訳はCC BY-SA 3.0ライセンスで公開されています"
+            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されいてる<a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>プロジェクトから取り入れています。Wikipediaによる翻訳はCC BY-SA 3.0ライセンスで公開されています"
         }
     }
 }
