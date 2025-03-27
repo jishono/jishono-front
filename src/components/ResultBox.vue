@@ -45,7 +45,7 @@
       v-if="word.definisjoner[0].wiki === 1"
     >
     <a :href="'https://no.wikipedia.org/wiki/' + word.oppslag" target="_blank">
-      <img src='./assets/wikipedia_logo_20px.png'>
+      <img :src="wikipediaLogo">
       <span
         class="ml-1 wiki-link"
       >
@@ -164,6 +164,11 @@
 
   </div>
 </template>
+
+<script setup>
+
+import wikipediaLogo from './assets/wikipedia_logo_20px.png';
+</script>
 
 <script>
 import { defineComponent } from 'vue';
