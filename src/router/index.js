@@ -1,8 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Search from '../views/Search.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Search from '../views/Search.vue';
 
-Vue.use(VueRouter)
 
 const routes = [
   {
@@ -21,17 +19,15 @@ const routes = [
     path: '/about',
     name: 'About',
     component: Search
-    //component: () => import('../views/About.vue')
   },
   {
-    path: '*',
+    path: '/:pathMatch(.*)*',
     component: Search
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(),
   routes
 })
 

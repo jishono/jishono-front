@@ -24,23 +24,33 @@
         <p>{{ $t('vipps_dialog.p2') }}</p>
         <img
           class="img-fluid text-center mt-4"
-          src='@/assets/vipps.png'
+          :src="vippsLogo"
         >
       </div>
     </div>
   </transition>
 </template>
 
-<script>
 
-export default {
+<script setup>
+import vippsLogo from '../assets/vipps.png';
+</script>
+
+<script>
+import { defineComponent } from 'vue';
+
+
+export default defineComponent({
+  emits: ['close-vipps-dialog'],
   name: 'VippsDialog',
+
   data () {
     return {
     }
   },
+
   props: {
     show: Boolean
   },
-}
+});
 </script>

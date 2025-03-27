@@ -1,23 +1,13 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import { createI18n } from 'vue-i18n';
+import ja from './locales/ja.json';
+import no from './locales/no.json';
 
-Vue.use(VueI18n)
-
-function loadLocaleMessages () {
-  const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-  const messages = {}
-  locales.keys().forEach(key => {
-    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-    if (matched && matched.length > 1) {
-      const locale = matched[1]
-      messages[locale] = locales(key)
-    }
-  })
-  return messages
-}
-
-export default new VueI18n({
-  locale: localStorage.getItem('locale') || process.env.VUE_APP_I18N_LOCALE || 'ja',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'ja',
-  messages: loadLocaleMessages()
+export default createI18n({
+  legacy: false,
+  locale: localStorage.getItem('locale') || import.meta.env.VITE_I18N_LOCALE || 'ja',
+  fallbackLocale: import.meta.env.VITE_I18N_FALLBACK_LOCALE || 'ja',
+  messages: {
+    no,
+    ja
+  }
 })

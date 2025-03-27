@@ -38,11 +38,13 @@
               <a
                 href="https://github.com/jishono/"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="badge badge-pill pill-button mx-1"
               >Github</a>
               <a
                 href="https://baksida.jisho.no/om"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="badge badge-pill pill-button mx-1"
               >Baksida</a>
             </div>
@@ -52,15 +54,14 @@
               class="flag-icon mx-1"
               height="30px"
               width="30px"
-              src="@/assets/japan-icon-border.png"
+              :src="japanIcon"
               @click="setLocale('ja')"
             >
             <img
               class="flag-icon mx-1"
               height="30px"
               width="30px"
-              bor
-              src="@/assets/norway-icon.png"
+              :src="norwayIcon"
               @click="setLocale('no')"
             >
           </div>
@@ -75,14 +76,23 @@
     />
   </footer>
 </template>
+<script setup>
 
+import japanIcon from '../assets/japan-icon-border.png';
+import norwayIcon from '../assets/norway-icon.png';
+
+
+</script>
 <script>
-import api from '../api.js'
-import VippsDialog from '../components/VippsDialog'
+import { defineComponent } from 'vue';
 
-export default {
+import api from '../api.js';
+import VippsDialog from '../components/VippsDialog.vue';
+
+export default defineComponent({
   name: 'Footer',
   components: { VippsDialog },
+
   data () {
     return {
       collected: 45,
@@ -90,17 +100,20 @@ export default {
       showVippsDialog: false,
     }
   },
+
   computed: {
     progress () {
       return this.collected / this.goal * 100
     }
   },
+
   methods: {
     setLocale (locale) {
       this.$i18n.locale = locale
       localStorage.setItem('locale', locale)
     }
   },
+
   mounted () {
     api.get('https://sheets.googleapis.com/v4/spreadsheets/1932p6AND-EnBwZ9ST5lfDn9nTD42MaVwsTVPzugplrQ/values/Sheet1/?key=AIzaSyD4UXqPCubwIZRCgV-0QVWXTiioPU6xpj4')
       .then(response => {
@@ -108,8 +121,6 @@ export default {
         this.collected = response.data.values[3][1]
         this.goal = response.data.values[3][2]
       })
-  }
-
-}
-
+  },
+});
 </script>

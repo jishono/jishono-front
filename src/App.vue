@@ -11,14 +11,18 @@
 </template>
 
 <script>
-import Header from './components/Header'
-import Footer from './components/Footer'
+import { defineComponent } from 'vue';
 
-export default {
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
+
+export default defineComponent({
   name: 'App',
+
   components: {
     Header, Footer
   },
+
   mounted () {
     if (localStorage.getItem('locale') === null) {
       localStorage.setItem('locale', 'ja')
@@ -26,6 +30,6 @@ export default {
     window.$(document).bind('focus', function (e) {
       e.preventDefault();
     });
-  }
-}
+  },
+});
 </script>

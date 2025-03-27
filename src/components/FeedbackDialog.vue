@@ -60,19 +60,25 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import api from '../api.js'
 
-export default {
+export default defineComponent({
+  emits: ['close-feedback-dialog'],
   name: 'FeedbackDialog',
+
   data () {
     return {
       feedback: "",
     }
   },
+
   props: {
     word: Object,
     show: Boolean
   },
+
   methods: {
     sendFeedback () {
       const id = this.word.lemma_id
@@ -84,5 +90,5 @@ export default {
         })
     },
   },
-}
+});
 </script>

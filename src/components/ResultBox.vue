@@ -45,7 +45,7 @@
       v-if="word.definisjoner[0].wiki === 1"
     >
     <a :href="'https://no.wikipedia.org/wiki/' + word.oppslag" target="_blank">
-      <img src='@/assets/wikipedia_logo_20px.png'>
+      <img src='./assets/wikipedia_logo_20px.png'>
       <span
         class="ml-1 wiki-link"
       >
@@ -166,13 +166,18 @@
 </template>
 
 <script>
-import ConjugationBox from './ConjugationBox'
+import { defineComponent } from 'vue';
 
-export default {
+import ConjugationBox from './ConjugationBox.vue';
+
+export default defineComponent({
+  emits: ['kanren-click', 'feedback-click', 'get-example-sentences'],
   name: 'ResultBox',
+
   components: {
     ConjugationBox
   },
+
   data () {
     return {
       loading: false,
@@ -195,10 +200,12 @@ export default {
       ],
     }
   },
+
   props: {
     word: Object,
     index: Number
   },
+
   computed: {
     totalPages () {
       if (this.word.example_sentences) {
@@ -217,6 +224,7 @@ export default {
       }
     },
   },
+
   methods: {
     scrollToCardHeader () {
       let cardHeader = document.getElementById('result' + this.word.lemma_id)
@@ -284,5 +292,5 @@ export default {
       return final_string
     }
   },
-}
-    </script>
+});
+</script>
