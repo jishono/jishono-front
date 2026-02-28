@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.jisho.no/</loc>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://www.jisho.no/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.jisho.no/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.jisho.no/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.jisho.no/about</loc>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://www.jisho.no/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.jisho.no/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.jisho.no/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
