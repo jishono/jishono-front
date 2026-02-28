@@ -1,14 +1,7 @@
 {
     "footer": {
         "oneliner": "jisho.no - norsk-japansk nettordbok",
-        "about": "Om jisho.no",
-        "vipps": "Doner med Vipps",
-        "goal": "Innsamlingsmål 2025"
-    },
-    "vipps_dialog": {
-        "headline": "Donasjoner",
-        "p1": "Fordi jisho.no er et 100% frivillig non-profit prosjekt er vi avhengige av av brukernes hjelp for å betale servere og domener. Alle donasjoner, store og små, er velkomne og vil i sin helhet bli brukt til prosjektet.",
-        "p2": "Vi tar for tiden kun imot donasjoner på Vipps."
+        "about": "Om jisho.no"
     },
     "feedback": {
         "title": "Tilbakemelding",

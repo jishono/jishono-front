@@ -45,11 +45,10 @@ This is a Vue 3 SPA for [jisho.no](https://www.jisho.no), a Norwegian–Japanese
 
 **Components:**
 - `Header.vue` — logo linking to `/search/`
-- `Footer.vue` — donation progress bar (fetched from Google Sheets API), locale switcher, VippsDialog trigger
+- `Footer.vue` — locale switcher, links to About/Github/Baksida
 - `ResultBox.vue` — per-word card with lazy example sentences, conjugations, feedback button
 - `ConjugationBox.vue` — conjugation table rendered from paradigm data; splits columns for mobile vs desktop
 - `FeedbackDialog.vue` — modal overlay for submitting word feedback (`POST /words/:id/feedback`)
-- `VippsDialog.vue` — donation modal
 - `About.vue` — static about page content (all text via i18n)
 
 **API module:** `src/api.js` exports a single Axios instance with `VITE_NODE_HOST` as `baseURL`.
