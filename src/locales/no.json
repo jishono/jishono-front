@@ -118,8 +118,8 @@
             "contact": "Alle spørsmål om prosjektet kan rettes til admin (alfakrøll) jisho.no"
         },
         "p5": {
-            "title": "Om eksempelsetningene og Wikipedia",
-            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>, som er tilgjengeliggjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeliggjort under lisensen CC BY-SA 3.0"
+            "title": "Kilder og lisenser",
+            "text": "<ul><li>Eksempelsetninger er hentet fra <a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a> og er lisensiert under <a href='https://creativecommons.org/licenses/by/2.0/fr/' target='_blank' rel='noopener noreferrer'>CC BY 2.0 FR</a>.</li><li>Alle oversettelser er lisensiert under <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>.</li></ul>"
         }
     }
 }

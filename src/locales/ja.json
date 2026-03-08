@@ -118,8 +118,8 @@
             "contact": "プロジェクトへのご質問は admin (アットマーク) jisho.no までお寄せください。"
         },
         "p5": {
-            "title": "例文とWikipediaによる翻訳について",
-            "text": "すべての例文はCC-BY 2.0 FRのライセンスで公開されている<a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>プロジェクトから取り入れています。Wikipediaによる翻訳はCC BY-SA 3.0ライセンスで公開されています"
+            "title": "出典とライセンス",
+            "text": "<ul><li>例文は<a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>から取り入れており、<a href='https://creativecommons.org/licenses/by/2.0/fr/' target='_blank' rel='noopener noreferrer'>CC BY 2.0 FR</a>ライセンスで公開されています。</li><li>すべての翻訳は<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>ライセンスで公開されています。</li></ul>"
         }
     }
 }
