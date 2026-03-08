@@ -21,7 +21,11 @@
         "request_sent": "Ønske om oversettelse sendt!",
         "show_more": "Vis flere treff",
         "no_examples": "Ingen eksempelsetninger funnet.",
-        "wikipedia": "Oversettelse fra Wikipedia"
+        "wikipedia": "Oversettelse fra Wikipedia",
+        "translations_by": "Oversettelser av:",
+        "source_ai": "Kunstig intelligens",
+        "source_ai_approved": "AI (godkjent av mennesker)",
+        "source_user": "Menneskelig oversetter"
     },
     "words": {
         "word": "Oppslag:",

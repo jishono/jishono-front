@@ -21,7 +21,11 @@
         "request_sent": "翻訳依頼を送信しました！",
         "show_more": "もっと見る",
         "no_examples": "例文の登録がありません",
-        "wikipedia": "Wikipediaによる翻訳"
+        "wikipedia": "Wikipediaによる翻訳",
+        "translations_by": "翻訳元：",
+        "source_ai": "AI翻訳",
+        "source_ai_approved": "AI（人間による承認済み）",
+        "source_user": "人による翻訳"
     },
     "words": {
         "word": "単語:",
