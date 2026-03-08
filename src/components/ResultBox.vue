@@ -112,6 +112,7 @@
       </div>
       <div class="text-right button-row">
         <button
+          v-if="word.has_examples"
           class="btn shadow-none btn-sm mb-2"
           :class="showingExamples ? 'btn-primary' : 'btn-outline-primary'"
           type="button"
