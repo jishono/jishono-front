@@ -101,14 +101,6 @@
             <span class="source-tooltip" :class="{ 'source-tooltip-active': activeTooltip === 'USER' }">{{ $t('interface.source_user') }}</span>
           </span>
         </span>
-        <div
-          v-if="word.example_sentences && totalPages > 1 && showingExamples"
-          style="display: flex; align-items: center"
-        >
-          <i class="fa fa-chevron-left fa-sm pt-0" @click="previousPage"></i>
-          <span class="mx-1 pages">{{ page + 1 }} / {{ totalPages }}</span>
-          <i class="fa fa-chevron-right pt-0" @click="nextPage"></i>
-        </div>
       </div>
       <div class="text-right button-row">
         <button
@@ -166,6 +158,15 @@
         class="ja ml-2"
       >
         {{ $t("interface.no_examples") }}
+      </div>
+      <div
+        v-if="word.example_sentences && totalPages > 1"
+        style="display: flex; align-items: center; justify-content: flex-end"
+        class="mt-1"
+      >
+        <i class="fa fa-chevron-left fa-sm pt-0" @click="previousPage"></i>
+        <span class="mx-1 pages">{{ page + 1 }} / {{ totalPages }}</span>
+        <i class="fa fa-chevron-right pt-0" @click="nextPage"></i>
       </div>
     </div>
     <div
