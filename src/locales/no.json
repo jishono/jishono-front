@@ -35,7 +35,7 @@
             "det": "determinativ",
             "interjeksjon": "interjeksjon",
             "konjunksjon": "konjunksjon",
-            "prefiks": "接頭辞",
+            "prefiks": "prefiks",
             "preposisjon": "preposisjon",
             "pron": "pronomen",
             "subjunksjon": "subjunksjon",
@@ -101,7 +101,7 @@
     "about": {
         "p1": {
             "title": "Hva er jisho.no?",
-            "text": "jisho.no en norsk-japansk nettordbok hvor du kan slå opp norske ord for å finne japanske oversettelser og eksempelsetninger. Alle oversettelsene og selve nettsiden er laget av frivillige som synes det er både gøy og givende å lage ei ordbok som mange kan ha nytte av."
+            "text": "jisho.no er en norsk-japansk nettordbok hvor du kan slå opp norske ord for å finne japanske oversettelser og eksempelsetninger. Alle oversettelsene og selve nettsiden er laget av frivillige som synes det er både gøy og givende å lage ei ordbok som mange kan ha nytte av."
         },
         "p2": {
             "title": "Kan jeg også bidra?",
@@ -109,7 +109,7 @@
         },
         "p3": {
             "title": "Tar dere imot donasjoner?",
-            "text": "Det gjør vi gjerne! Siden jisho.no er et 100% frivillig non-profit prosjekt er vi avhengige av av brukernes hjelp for å betale servere og domener. Alle donasjoner, store og små, er velkomne og vil i sin helhet bli brukt til prosjektet. Skulle vi få inn mer enn vi trenger i overskuelig fremtid kommer vi til å stoppe å ta imot flere donasjoner. Klikk på elementet under denne boksen for mer info."
+            "text": "Det gjør vi gjerne! Siden jisho.no er et 100% frivillig non-profit prosjekt er vi avhengige av brukernes hjelp for å betale servere og domener. Alle donasjoner, store og små, er velkomne og vil i sin helhet bli brukt til prosjektet. Skulle vi få inn mer enn vi trenger i overskuelig fremtid kommer vi til å stoppe å ta imot flere donasjoner. Klikk på elementet under denne boksen for mer info."
         },
         "p4": {
             "title": "Hvem står bak jisho.no?",
@@ -119,7 +119,7 @@
         },
         "p5": {
             "title": "Om eksempelsetningene og Wikipedia",
-            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>, som er tilgjengeligjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeligjort under lisensen CC BY-SA 3.0"
+            "text": "Alle eksempelsetningene er hentet fra det fantastiske datasettet til <a href='https://tatoeba.org' target='_blank' rel='noopener noreferrer'>Tatoeba</a>, som er tilgjengeliggjort under lisensen CC-BY 2.0 FR. Oversettelser fra Wikipedia er tilgjengeliggjort under lisensen CC BY-SA 3.0"
         }
     }
 }
