@@ -7,7 +7,7 @@
         </div>
         <div class="col-6 col-md-4 text-md-center text-left m-auto">
           <div v-if="word.uttale.length > 0">
-            <span class="ja">{{ $t("interface.pronounciation") }}:</span>
+            <span class="ja">{{ $t("interface.pronounciation") }}: </span>
             <span class="pronounctiation">
               {{ word.uttale[0].transkripsjon }}
             </span>
@@ -59,8 +59,18 @@
     <div class="d-flex justify-content-between mx-3 mb-2">
       <div style="display: flex; align-items: center; gap: 8px">
         <span
-          v-if="word.definisjoner.some((d) => ['WIKI', 'AI', 'USER'].includes(d.source))"
-          style="display: flex; align-items: center; gap: 6px; font-size: 0.85em; color: #666"
+          v-if="
+            word.definisjoner.some((d) =>
+              ['WIKI', 'AI', 'USER'].includes(d.source),
+            )
+          "
+          style="
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85em;
+            color: #666;
+          "
         >
           {{ $t("interface.translations_by") }}
           <span
@@ -74,22 +84,47 @@
               style="display: flex; align-items: center"
               @click.stop="openWiki"
             >
-              <i class="mdi mdi-wikipedia source-icon" :class="{ 'source-icon-active': activeTooltip === 'WIKI' }" style="color: black; font-size: 1.4em"></i>
+              <i
+                class="mdi mdi-wikipedia source-icon"
+                :class="{ 'source-icon-active': activeTooltip === 'WIKI' }"
+                style="color: black; font-size: 1.4em"
+              ></i>
             </a>
-            <span class="source-tooltip" :class="{ 'source-tooltip-active': activeTooltip === 'WIKI' }">Wikipedia</span>
+            <span
+              class="source-tooltip"
+              :class="{ 'source-tooltip-active': activeTooltip === 'WIKI' }"
+              >Wikipedia</span
+            >
           </span>
           <span
             v-if="word.definisjoner.some((d) => d.source === 'AI')"
             class="source-icon-wrap"
             @click.stop="toggleTooltip('AI')"
           >
-            <i class="mdi mdi-robot source-icon" :class="{ 'source-icon-active': activeTooltip === 'AI' }" style="color: #1a73e8; font-size: 1.4em"></i>
             <i
-              v-if="word.definisjoner.some((d) => d.source === 'AI' && d.ai_approvals >= 2)"
+              class="mdi mdi-robot source-icon"
+              :class="{ 'source-icon-active': activeTooltip === 'AI' }"
+              style="color: #1a73e8; font-size: 1.4em"
+            ></i>
+            <i
+              v-if="
+                word.definisjoner.some(
+                  (d) => d.source === 'AI' && d.ai_approvals >= 2,
+                )
+              "
               class="mdi mdi-check-circle source-icon-badge"
             ></i>
-            <span class="source-tooltip" :class="{ 'source-tooltip-active': activeTooltip === 'AI' }">
-              {{ word.definisjoner.some((d) => d.source === 'AI' && d.ai_approvals >= 2) ? $t('interface.source_ai_approved') : $t('interface.source_ai') }}
+            <span
+              class="source-tooltip"
+              :class="{ 'source-tooltip-active': activeTooltip === 'AI' }"
+            >
+              {{
+                word.definisjoner.some(
+                  (d) => d.source === "AI" && d.ai_approvals >= 2,
+                )
+                  ? $t("interface.source_ai_approved")
+                  : $t("interface.source_ai")
+              }}
             </span>
           </span>
           <span
@@ -97,8 +132,16 @@
             class="source-icon-wrap"
             @click.stop="toggleTooltip('USER')"
           >
-            <i class="mdi mdi-account source-icon" :class="{ 'source-icon-active': activeTooltip === 'USER' }" style="color: #f57c00; font-size: 1.4em"></i>
-            <span class="source-tooltip" :class="{ 'source-tooltip-active': activeTooltip === 'USER' }">{{ $t('interface.source_user') }}</span>
+            <i
+              class="mdi mdi-account source-icon"
+              :class="{ 'source-icon-active': activeTooltip === 'USER' }"
+              style="color: #f57c00; font-size: 1.4em"
+            ></i>
+            <span
+              class="source-tooltip"
+              :class="{ 'source-tooltip-active': activeTooltip === 'USER' }"
+              >{{ $t("interface.source_user") }}</span
+            >
           </span>
         </span>
       </div>
@@ -184,7 +227,6 @@
   </div>
 </template>
 
-
 <script>
 import { defineComponent } from "vue";
 
@@ -223,11 +265,13 @@ export default defineComponent({
   },
 
   mounted() {
-    this._closeTooltip = () => { this.activeTooltip = null; };
-    document.addEventListener('click', this._closeTooltip);
+    this._closeTooltip = () => {
+      this.activeTooltip = null;
+    };
+    document.addEventListener("click", this._closeTooltip);
   },
   unmounted() {
-    document.removeEventListener('click', this._closeTooltip);
+    document.removeEventListener("click", this._closeTooltip);
   },
 
   props: {
@@ -259,7 +303,10 @@ export default defineComponent({
       this.activeTooltip = this.activeTooltip === source ? null : source;
     },
     openWiki() {
-      window.open('https://no.wikipedia.org/wiki/' + this.word.oppslag, '_blank');
+      window.open(
+        "https://no.wikipedia.org/wiki/" + this.word.oppslag,
+        "_blank",
+      );
       this.activeTooltip = null;
     },
     scrollToCardHeader() {
