@@ -43,8 +43,7 @@
     <div class="mx-3" v-if="word.relatert.length > 0">
       <span class="ja related">
         {{ $t("interface.related") }}
-      </span>
-      <span
+      </span>&nbsp;<span
         v-for="(relatedWord, i) in word.relatert"
         :key="word.lemma_id + relatedWord"
       >
