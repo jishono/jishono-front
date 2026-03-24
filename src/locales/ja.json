@@ -33,6 +33,8 @@
             "adj": "形容詞",
             "adv": "副詞",
             "det": "限定詞",
+            "egennavn": "固有名詞",
+            "forkorting": "略語",
             "interjeksjon": "感動詞",
             "konjunksjon": "接続詞",
             "prefiks": "接頭辞",
@@ -40,7 +42,8 @@
             "pron": "代名詞",
             "subjunksjon": "関係詞",
             "subst": "名詞",
-            "verb": "動詞"
+            "verb": "動詞",
+            "uttrykk": "表現"
         },
         "gender": {
             "m": "（男）",

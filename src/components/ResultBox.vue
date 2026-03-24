@@ -41,9 +41,7 @@
       </div>
     </div>
     <div class="mx-3" v-if="word.relatert.length > 0">
-      <span class="ja related">
-        {{ $t("interface.related") }}
-      </span>&nbsp;<span
+      <span class="ja related"> {{ $t("interface.related") }} </span>&nbsp;<span
         v-for="(relatedWord, i) in word.relatert"
         :key="word.lemma_id + relatedWord"
       >
@@ -251,6 +249,8 @@ export default defineComponent({
         "adj",
         "adv",
         "det",
+        "egennavn",
+        "forkorting",
         "interjeksjon",
         "konjunksjon",
         "preposisjon",
@@ -259,6 +259,7 @@ export default defineComponent({
         "subjunksjon",
         "subst",
         "verb",
+        "uttrykk",
       ],
     };
   },
