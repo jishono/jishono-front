@@ -297,6 +297,8 @@ export default defineComponent({
       } else if (to.path === "/about") {
         this.q = "";
         this.showAbout = true;
+      } else if (to.params.query && to.params.query !== this.q) {
+        this.q = to.params.query;
       }
     },
   },
