@@ -156,6 +156,7 @@
           </span>
         </button>
         <button
+          v-if="word.boy_tabell !== 'uttrykk'"
           class="btn btn-sm shadow-none mb-2 ml-1"
           :class="showingConjugations ? 'btn-primary' : 'btn-outline-primary'"
           type="button"
