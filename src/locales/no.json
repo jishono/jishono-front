@@ -25,7 +25,9 @@
         "translations_by": "Oversatt av:",
         "source_ai": "Kunstig intelligens",
         "source_ai_approved": "AI (godkjent av mennesker)",
-        "source_user": "Menneskelig oversetter"
+        "source_user": "Menneskelig oversetter",
+        "show_all_related": "Vis alle",
+        "show_less_related": "Vis færre"
     },
     "words": {
         "word": "Oppslag:",

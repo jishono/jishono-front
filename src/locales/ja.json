@@ -25,7 +25,9 @@
         "translations_by": "翻訳元：",
         "source_ai": "AI翻訳",
         "source_ai_approved": "AI（人間による承認済み）",
-        "source_user": "人による翻訳"
+        "source_user": "人による翻訳",
+        "show_all_related": "すべて表示",
+        "show_less_related": "折りたたむ"
     },
     "words": {
         "word": "単語:",

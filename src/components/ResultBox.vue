@@ -41,17 +41,32 @@
       </div>
     </div>
     <div class="mx-3" v-if="word.relatert.length > 0">
-      <span class="ja related"> {{ $t("interface.related") }} </span>&nbsp;<span
-        v-for="(relatedWord, i) in word.relatert"
-        :key="word.lemma_id + relatedWord"
+      <div
+        ref="relatedContainer"
+        :class="{ 'related-clipped': !showAllRelated }"
       >
-        <span
-          class="pointer underline"
-          @click="$emit('kanren-click', relatedWord)"
-          >{{ relatedWord }}</span
+        <span class="ja related"> {{ $t("interface.related") }} </span>&nbsp;<span
+          v-for="(relatedWord, i) in word.relatert"
+          :key="word.lemma_id + relatedWord"
         >
-        <span v-if="i != word.relatert.length - 1">,&nbsp;</span>
-      </span>
+          <span
+            class="pointer underline"
+            @click="$emit('kanren-click', relatedWord)"
+            >{{ relatedWord }}</span
+          >
+          <span v-if="i != word.relatert.length - 1">,&nbsp;</span>
+        </span>
+      </div>
+      <span
+        v-if="hasMoreRelated"
+        class="pointer related-toggle ja"
+        @click="showAllRelated = !showAllRelated"
+        >{{
+          showAllRelated
+            ? $t("interface.show_less_related")
+            : $t("interface.show_all_related")
+        }}</span
+      >
     </div>
     <div class="d-flex justify-content-between mx-3 mb-2">
       <div style="display: flex; align-items: center; gap: 8px">
@@ -244,6 +259,8 @@ export default defineComponent({
       page: 0,
       showingExamples: false,
       showingConjugations: false,
+      showAllRelated: false,
+      hasMoreRelated: false,
       relatedWords: [],
       activeTooltip: null,
       partsOfSpeech: [
@@ -270,6 +287,12 @@ export default defineComponent({
       this.activeTooltip = null;
     };
     document.addEventListener("click", this._closeTooltip);
+    this.$nextTick(() => {
+      const el = this.$refs.relatedContainer;
+      if (el) {
+        this.hasMoreRelated = el.scrollHeight > el.clientHeight;
+      }
+    });
   },
   unmounted() {
     document.removeEventListener("click", this._closeTooltip);
@@ -380,6 +403,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.related-clipped {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.related-toggle {
+  font-size: 0.82em;
+  color: #888;
+}
+.related-toggle:hover {
+  color: #444;
+}
 .source-icon {
   display: inline-block;
   transition: transform 0.15s ease;
